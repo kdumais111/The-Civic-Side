@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "30122_project_the_civic_side"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8"
 requests = "^2.28.2"
 lxml = "^4.9.2"
 
