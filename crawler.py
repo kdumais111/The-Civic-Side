@@ -1,4 +1,7 @@
+import sys
 import requests
+import lxml.html
+import json
 
 # 2019 Chicago Mayoral Election Candidates
 # Lori Lightfoot
@@ -26,6 +29,10 @@ enyia = "https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCom
 joyce = "https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCommittees.aspx?txtCmteID=qY2cPeWqHz1dftBZWCXIyQ%3d%3d&ddlVendorState=Ry707kcsXsM%3d&ddlContributionType=wOGh3QTPfKqV2YWjeRmjTeStk426RfVK&ddlState=Ry707kcsXsM%3d&ddlFiledDateTime=Ry707kcsXsM%3d&ddlFiledDateTimeThru=Ry707kcsXsM%3d"
 chico = "https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCommittees.aspx?txtCmteID=2kUSbsNeCpF%2bI%2fN%2faOXDlg%3d%3d&ddlVendorState=Ry707kcsXsM%3d&ddlContributionType=wOGh3QTPfKqV2YWjeRmjTeStk426RfVK&ddlState=Ry707kcsXsM%3d&ddlFiledDateTime=Ry707kcsXsM%3d&ddlFiledDateTimeThru=Ry707kcsXsM%3d"
 vallas = "https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCommittees.aspx?txtCmteID=%2bFNNULG1ToBmbnvIwDP25A%3d%3d&ddlVendorState=Ry707kcsXsM%3d&ddlContributionType=wOGh3QTPfKqV2YWjeRmjTeStk426RfVK&ddlState=Ry707kcsXsM%3d&ddlFiledDateTime=Ry707kcsXsM%3d&ddlFiledDateTimeThru=Ry707kcsXsM%3d"
+
+
+response = requests.get(chico)
+root = lxml.html.fromstring(response.text)
 
 # Notes:
 # Contributions can be flagged a refunds in the description column - how should we handle refunds?
