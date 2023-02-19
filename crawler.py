@@ -31,8 +31,32 @@ chico = "https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCom
 vallas = "https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCommittees.aspx?txtCmteID=%2bFNNULG1ToBmbnvIwDP25A%3d%3d&ddlVendorState=Ry707kcsXsM%3d&ddlContributionType=wOGh3QTPfKqV2YWjeRmjTeStk426RfVK&ddlState=Ry707kcsXsM%3d&ddlFiledDateTime=Ry707kcsXsM%3d&ddlFiledDateTimeThru=Ry707kcsXsM%3d"
 
 
-response = requests.get(chico)
-root = lxml.html.fromstring(response.text)
+def get_contributions(url):
+    """
+    Takes a URL to a committee contributions page and returns
+    a list of dictionaries (one dictionary per contribution).
+    """
+    response = requests.get(url, verify=False)
+    root = lxml.html.fromstring(response.text)
+    rows = root.cssselect("#ContentPlaceHolder1_gvContributions tr")
+    del rows[0] # 1st row is header --> drop
+
+    contributions = []
+
+    for row in rows:
+        contribution = {}
+        cells = row.cssselect("td") # some cells have <br> --> use text_content()
+        contribution["donor"] = str(cells[0].text_content()) # name & address
+        contribution["amount"] = cells[1].text
+        contribution["received_date"] = cells[2].text
+        contribution["reported_date"] = cells[3].text
+        contribution["contribution_type"] = cells[4].text
+        contribution["received_by"] = cells[4][1].text
+        # TODO: add Description, Vendor Name, and Vendor Address
+        # once I've figured out how to access records with those fields
+
+# Selector for "Page Size" > "All" - is there a way to have my scraper "click" this?
+#ContentPlaceHolder1_gvContributions_pnlLeft_phPagerTemplate_gvContributions_PageSize > option:nth-child(7)
 
 # Notes:
 # Contributions can be flagged a refunds in the description column - how should we handle refunds?
