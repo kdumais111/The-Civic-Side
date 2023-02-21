@@ -13,7 +13,7 @@
     fields.Zipcode = fields.Zipcode.str.replace(r"d{4}", r"0$&")
     fields.City = fields.City.str.lower()
     
-    clean_zipfile= pathlib.Path("zillowcleaning.py").parent /"datasets/Chicago Precinct and Ward Names by Zip Code.csv"
+    clean_zipfile= pathlib.Path("zillowcleaning.py").parent /"datasets/Chicago Precinct by Zip Code.csv"
     clean_zip = pd.read_csv(clean_zipfile)
     zip_clean=set(clean_zip["Zipcode"])
     gov_zips = list(zip_clean)
