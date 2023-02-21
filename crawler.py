@@ -4,13 +4,12 @@ import lxml.html
 import json
 
 
-def get_contributions(url):
+def get_contributions(saved_page):
     """
-    Takes a URL to a committee contributions page and returns
+    Takes an html file saved from a committee contributions page and returns
     a list of dictionaries (one dictionary per contribution).
     """
-    # open & read file
-    saved_page = "enyia.html"
+
     with open(saved_page) as sp:
         root = lxml.html.fromstring(sp.read())
     
@@ -20,7 +19,9 @@ def get_contributions(url):
     col_names = []
     for col in header:
         col_names.append(col.text_content())
-    del rows[0]
+
+    del rows[0] # header
+    del rows[-1] # footer
 
     contributions = []
 
