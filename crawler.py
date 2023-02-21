@@ -1,5 +1,3 @@
-import sys
-import requests
 import lxml.html
 import json
 
@@ -27,18 +25,25 @@ def get_contributions(saved_page):
 
     for row in rows:
         contribution = {}
-        cells = row.cssselect("td") # some cells have <br> --> use text_content()
-        contribution["donor"] = str(cells[0].text_content()) # name & address
-        contribution["amount"] = cells[1].text
-        contribution["received_date"] = cells[2].text
-        contribution["reported_date"] = cells[3].text
+        cells = row.cssselect("td")
+        contribution["donor_name"] = cells[0].text
+        # .text only returns the first line of text if a cell has breaks
+        # .text_content() returns a lxml.etree._ElementUnicodeResult
+        # donor_info is name, address, and sometimes occupation and employer
+        # TODO: parse during cleaning
+        contribution["donor_info"] = str(cells[0].text_content()) 
+        contribution["amount"] = str(cells[1].text_content())
+        contribution["received_date"] = str(cells[2].text_content())
+        contribution["reported_date"] = str(cells[3].text_content())
         contribution["contribution_type"] = cells[4].text
         contribution["received_by"] = cells[4][1].text
-        # TODO: add Description, Vendor Name, and Vendor Address
-        # once I've figured out how to access records with those fields
+        contribution["description"] = str(cells[5].text_content())
+        contribution["vendor_name"] = str(cells[6].text_content())
+        contributions.append(contribution)
 
-# Selector for "Page Size" > "All" - is there a way to have my scraper "click" this?
-#ContentPlaceHolder1_gvContributions_pnlLeft_phPagerTemplate_gvContributions_PageSize > option:nth-child(7)
+    return contributions
+
 
 # Notes:
-# Contributions can be flagged a refunds in the description column - how should we handle refunds?
+# Not common, but a contribution can be described as a refund - 
+# what does that mean in this context?
