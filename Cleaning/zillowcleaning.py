@@ -13,7 +13,7 @@ fields.Zipcode = fields.Zipcode.astype("string")
 fields.Zipcode = fields.Zipcode.str.replace(r"d{4}", r"0$&")
 fields.City = fields.City.str.lower()
 
-clean_zipfile= pathlib.Path("zillowcleaning.py").parent /"datasets/Chicago Precinct by Zip Code.csv"
+clean_zipfile= pathlib.Path("zillowcleaning.py").parent /"Datasets/Chicago Precinct by Zip Code.csv"
 clean_zip = pd.read_csv(clean_zipfile)
 zip_clean=set(clean_zip["Zipcode"])
 gov_zips = list(zip_clean)
@@ -33,5 +33,5 @@ for missing in missingzip:
 fields = fields.loc[fields.City == "chicago"]
 fields["2019avprice"]= fields.loc[:,["1/31/19","2/28/19","3/31/19","4/30/19","5/31/19","6/30/19","7/31/19","8/31/19","9/30/19","10/31/19","11/30/19","12/31/19"]].agg("mean",axis=1)
 clean_data = fields[["Zipcode","2019avprice"]]
-clean_data.to_csv("zillow_cleaned_complete.csv")
+clean_data.to_csv("zillow_cleaned_complete.csv", index=False)
 

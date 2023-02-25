@@ -10,14 +10,14 @@ cursor = connection.cursor()
 
 #Add in precinct data
 cursor.execute('CREATE TABLE IF NOT EXISTS presincts(Zipcode text, PRECINCT_NAME text)')
-csvfile= pathlib.Path("zillowcleaning.py").parent /"datasets/Chicago Precinct by Zip Code.csv"
+csvfile= pathlib.Path("zillowcleaning.py").parent /"Datasets/Chicago Precinct by Zip Code.csv"
 df = pd.read_csv(csvfile)
 df.to_sql('presincts', connection, if_exists='replace', index=False)
 cursor.execute("SELECT Zipcode from presincts")
 
 #Add in wards
 cursor.execute('CREATE TABLE IF NOT EXISTS wards(Zip text, ward text)')
-wardfile= pathlib.Path("zillowcleaning.py").parent /"datasets/Chicago Ward Names by Zip Code.csv"
+wardfile= pathlib.Path("zillowcleaning.py").parent /"Datasets/Chicago Ward Names by Zip Code.csv"
 wardpd= pd.read_csv(wardfile)
 wardpd.to_sql('wards', connection, if_exists='replace', index=False)
 cursor.execute("SELECT * from wards")

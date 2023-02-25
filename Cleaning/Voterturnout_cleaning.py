@@ -16,5 +16,5 @@ df.loc[1,4]="ward"
 df=df.drop(wardheaders.index)
 df=df.drop(tableend.index)
 df=df.drop(headers.index[1:])
+df[3]= df[3].str.replace(r'[ %]',"")
 df.to_csv("voterturnout.csv")
-df.dropna(axis=1, how='any')

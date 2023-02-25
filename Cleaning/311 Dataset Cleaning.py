@@ -34,12 +34,13 @@ zip.to_csv("311_complaint_count.csv")
 df = df.dropna()
 df["ZIP_CODE"] = df["ZIP_CODE"].astype(int)
 df= df[df["ZIP_CODE"].isin (pop['zipcode'])]
-comp_by_zip={}
+comp_by_zip=[]
 for zipcode, zipcodegroup in df[["SR_TYPE","ZIP_CODE"]].groupby("ZIP_CODE"):
-    comp_by_zip[zipcode] = zipcodegroup.value_counts(
-    sort=True, dropna=True).to_frame('complaintcounts').iloc[0:5]
-complaints= pd.DataFrame.from_dict(comp_by_zip) 
-complaints.to_csv('311_topcomplaints_byzip.csv', index = False, header=True)
+    comp_by_zip.append(zipcodegroup.value_counts(
+    sort=True, dropna=True).to_frame('complaintcounts').iloc[0:5])
+
+complaints= pd.concat(comp_by_zip) 
+complaints.to_csv('311_topcomplaints_byzip.csv', header=True)
 
 
 
