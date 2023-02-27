@@ -1,14 +1,6 @@
-import sys
 import json
 import re
-import datetime
-
-# TODO list:
-# Delete name from donor_info (str.replace donor_name)
-# Extract state and zip from donor_info
-# Create num_amount (remove "$" and "," from amount, case to float)
-# dates strs --> date objects
-    # https://www.educative.io/answers/how-to-convert-a-string-to-a-date-in-python
+# import datetime
 
 def clean(json_file, clean_file):
     """
@@ -20,19 +12,24 @@ def clean(json_file, clean_file):
     
     for contribution in contributions:
         contribution["donor_info"] = contribution["donor_info"].replace(contribution["donor_name"], "")
-        contribution["name"] = contribution["name"].title()
+        contribution["donor_name"] = contribution["donor_name"].title()
         contribution["donor_info"] = contribution["donor_info"].strip()
-        state_zip = re.search(",\s+\D{2}\s+\d{5}", contribution["donor_info"]).group()
-        contribution["state"] = re.search("[A-Z]{2}", state_zip).group()
-        contribution["zip"] = re.search("\d{5}", state_zip).group()
+        if re.search(",\s+\D{2}\s+\d{5}", contribution["donor_info"]):
+            state_zip = re.search(",\s+\D{2}\s+\d{5}", contribution["donor_info"]).group()
+            contribution["state"] = re.search("[A-Z]{2}", state_zip).group()
+            contribution["zip"] = re.search("\d{5}", state_zip).group()
+        else:
+            contribution["state"] = None
+            contribution["zip"] = None
         contribution["amount"] = float(contribution["amount"].replace("$", "").replace(",", ""))
-        month, day, year = contribution["received_date"].split("/")
-        contribution["datetime_date"] = datetime.date(int(year), int(month), int(day))
+        # month, day, year = contribution["received_date"].split("/")
+        # contribution["datetime_date"] = datetime.date(int(year), int(month), int(day))
+        # TypeError: Object of type date is not JSON serializable --> TODO: decide how to handle dates
 
     with open(clean_file, "w") as cf:
         json.dump(contributions, cf, indent=1) 
 
-# References
+# Reference
 # https://www.geeksforgeeks.org/pattern-matching-python-regex/
 # https://www.educative.io/answers/how-to-convert-a-string-to-a-date-in-python
 # https://www.programiz.com/python-programming/datetime/strptime
