@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 import datetime
 
 def process_df(json_file, period_start, period_end):
@@ -27,31 +28,38 @@ def process_df(json_file, period_start, period_end):
 
     return df
 
-def summary_stats(df, zips):
+def summary_stats(df, zips, stats_file):
     """
-    Genereates summary statistics for the specified zip codes.
+    Genereates summary statistics for the specified zip codes and
+    saves them to a JSON file.
 
     Inputs:
         df (Pandas dataframe): data to generate summary stats from
         zips (lst of strs): zip codes to generate summary stats for
-
-    Returns:
-        stats (Pandas dataframe): summary stats by zip code
+        stats_file (str): JSON filename (e.g., "summary-stats.JSON")
     """
-    stats = [] # TODO: pass to pd.DataFrame
+    stats = []
 
     for zip in zips:
+        # Is making a new, zip-specific dataframe the best way to go here?
+        # It would take more code to tell Pandas just to do operations for rows 
+        # with a certain zip value...
         zip_stats = {}
-        zip_stats["amt_donated"] = NONE
-        zip_stats["num_donations"] = NONE
-        zip_stats["min_donation"] = NONE
-        zip_stats["max_donation"] = NONE
-        zip_stats["avg_donation"] = NONE
+        zip_stats["zip"] = zip
+        zip_stats["num_donations"] = len(zip)
+        zip_stats["total_donated"] = zip["amount"].sum()
+        zip_stats["min_donation"] = zip["amount"].min()
+        zip_stats["max_donation"] = zip["amount"].max()
+        zip_stats["avg_donation"] = zip["amount"].mean()
+        stats.append(zip_stats)
+    
+    with open(stats_file, "w") as sf:
+        json.dump(stats, sf, indent=1)
 
 
 # References (process_df):
 # https://sparkbyexamples.com/pandas/pandas-change-string-object-to-date-in-dataframe/
 # https://www.geeksforgeeks.org/drop-rows-from-the-dataframe-based-on-certain-condition-applied-on-a-column/
 
-# References (summary_stats):
+# Reference (summary_stats):
 # https://stackoverflow.com/questions/13784192/creating-an-empty-pandas-dataframe-and-then-filling-it
