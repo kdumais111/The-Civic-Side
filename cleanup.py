@@ -1,9 +1,11 @@
 import json
 import re
+import datetime
+import pandas as pd
 
 def clean(json_file, clean_file):
     """
-    Takes a json file of campaign contributions data (json_file), cleans the data,
+    Takes a JSON file of campaign contributions data (json_file), cleans the data,
     and saves it to a new json file (clean_file).
     """
     with open(json_file) as jf:
@@ -21,10 +23,9 @@ def clean(json_file, clean_file):
             contribution["state"] = None
             contribution["zip"] = None
         contribution["amount"] = float(contribution["amount"].replace("$", "").replace(",", ""))
-        
+
     with open(clean_file, "w") as cf:
-        json.dump(contributions, cf, indent=1) 
+        json.dump(contributions, cf, indent=1)
 
-# Reference
+# Reference (clean)
 # https://www.geeksforgeeks.org/pattern-matching-python-regex/
-
