@@ -1,6 +1,5 @@
 import json
 import re
-# import datetime
 
 def clean(json_file, clean_file):
     """
@@ -22,16 +21,10 @@ def clean(json_file, clean_file):
             contribution["state"] = None
             contribution["zip"] = None
         contribution["amount"] = float(contribution["amount"].replace("$", "").replace(",", ""))
-        # month, day, year = contribution["received_date"].split("/")
-        # contribution["datetime_date"] = datetime.date(int(year), int(month), int(day))
-        # TypeError: Object of type date is not JSON serializable --> TODO: decide how to handle dates
-
+        
     with open(clean_file, "w") as cf:
         json.dump(contributions, cf, indent=1) 
 
 # Reference
 # https://www.geeksforgeeks.org/pattern-matching-python-regex/
-# https://www.educative.io/answers/how-to-convert-a-string-to-a-date-in-python
-# https://www.programiz.com/python-programming/datetime/strptime
-# https://docs.python.org/3/library/datetime.html?highlight=datetime#strftime-strptime-behavior
 
