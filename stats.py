@@ -44,18 +44,19 @@ def summary_stats(df, zips, stats_file):
         # Is making a new, zip-specific dataframe the best way to go here?
         # It would take more code to tell Pandas just to do operations for rows 
         # with a certain zip value...
+        zip_data = df["zip"] == zip
         zip_stats = {}
-        zip_stats["zip"] = zip
-        zip_stats["num_donations"] = len(zip)
-        zip_stats["total_donated"] = zip["amount"].sum()
-        zip_stats["min_donation"] = zip["amount"].min()
-        zip_stats["max_donation"] = zip["amount"].max()
-        zip_stats["avg_donation"] = zip["amount"].mean()
+        zip_stats["zip"] = zip_data
+        zip_stats["num_donations"] = len(zip_data)
+        zip_stats["total_donated"] = zip_data["amount"].sum()
+        zip_stats["min_donation"] = zip_data["amount"].min()
+        zip_stats["max_donation"] = zip_data["amount"].max()
+        zip_stats["avg_donation"] = zip_data["amount"].mean()
         stats.append(zip_stats)
     
     with open(stats_file, "w") as sf:
         json.dump(stats, sf, indent=1)
-
+        
 
 # References (process_df):
 # https://sparkbyexamples.com/pandas/pandas-change-string-object-to-date-in-dataframe/
