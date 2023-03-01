@@ -10,6 +10,8 @@ packages = [{include = "30122_project_the_civic_side"}]
 python = "^3.8"
 requests = "^2.28.2"
 lxml = "^4.9.2"
+pandas = "^1.5.3"
+pathlib = "^1.0.1"
 
 
 [build-system]
