@@ -15,7 +15,7 @@ def merge_candidates(candidates):
     """
     dfs = []
     for candidate in candidates:
-        df = pd.read_json(candidate)
+        df = pd.read_json(candidate, dtype=False)
         dfs.append(df)
     
     contributions = pd.concat(dfs)
@@ -23,9 +23,9 @@ def merge_candidates(candidates):
     return contributions
 
 
-def process_contributions(json_file, period_start, period_end):
+def process_contributions(df, period_start, period_end):
     """
-    Takes a JSON file of clean campaign contributions data,
+    Takes a Pandas dataframe of clean campaign contributions data (df),
     loads it into a Pandas data frame, converts dates from strings,
     and drops contributions received outside the specified period.
 
@@ -37,8 +37,6 @@ def process_contributions(json_file, period_start, period_end):
     Returns:
         df (Pandas dataframe): campaign contributions from the specified period
     """
-    df = pd.read_json(json_file, dtype=False)
-
     start = pd.to_datetime(period_start)
     end = pd.to_datetime(period_end)
 
