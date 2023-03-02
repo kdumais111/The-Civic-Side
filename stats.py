@@ -37,12 +37,13 @@ def process_contributions(json_file, period_start, period_end):
     Returns:
         df (Pandas dataframe): campaign contributions from the specified period
     """
-    df = pd.read_json(json_file)
+    df = pd.read_json(json_file, dtype=False)
 
     start = pd.to_datetime(period_start)
     end = pd.to_datetime(period_end)
 
     df["received_date"] = pd.to_datetime(df["received_date"])
+    df["zip_num"] = df["zip"].astype("Int64")
     outside_period = df[ (df["received_date"] < start) | 
         (df["received_date"] > end) ].index
     df.drop(outside_period, inplace=True)
@@ -63,14 +64,20 @@ def summary_stats(df, zips, stats_file):
     stats = []
 
     for zip in zips:
-        zip_data = df["zip"] == zip
+        zip_data = df[df["zip"] == zip]
         zip_stats = {}
-        zip_stats["zip"] = zip_data
+        zip_stats["zip"] = zip
         zip_stats["num_donations"] = len(zip_data)
         zip_stats["total_donated"] = zip_data["amount"].sum()
-        zip_stats["min_donation"] = zip_data["amount"].min()
-        zip_stats["max_donation"] = zip_data["amount"].max()
-        zip_stats["avg_donation"] = zip_data["amount"].mean()
+        if zip_stats["num_donations"] == 0:
+            zip_stats["min_donation"] = 0
+            zip_stats["max_donation"] = 0
+            zip_stats["avg_donation"] = 0
+        else:
+            zip_stats["min_donation"] = zip_data["amount"].min()
+            zip_stats["max_donation"] = zip_data["amount"].max()
+            zip_stats["avg_donation"] = zip_data["amount"].mean()
+
         stats.append(zip_stats)
     
     with open(stats_file, "w") as sf:
@@ -82,5 +89,6 @@ def summary_stats(df, zips, stats_file):
 # https://www.geeksforgeeks.org/drop-rows-from-the-dataframe-based-on-certain-condition-applied-on-a-column/
 # https://stackoverflow.com/questions/36921951/truth-value-of-a-series-is-ambiguous-use-a-empty-a-bool-a-item-a-any-o
 
-# Reference (summary_stats):
+# References (summary_stats):
 # https://stackoverflow.com/questions/13784192/creating-an-empty-pandas-dataframe-and-then-filling-it
+# https://stackoverflow.com/questions/47333227/pandas-valueerror-cannot-convert-float-nan-to-integer
