@@ -2,7 +2,28 @@ import pandas as pd
 import json
 import datetime
 
-def process_df(json_file, period_start, period_end):
+def merge_candidates(candidates):
+    """
+    Takes a list of clean campaign contributions data filenames (one per candidate)
+    and returns a dataframe with contributions for all of the specified candidates.
+
+    Inputs:
+        candidates (lst of file names): e.g., ["candidate1_clean.json", "candidate2_clean.json"]
+
+    Returns:
+        contributions (Pandas data frame)
+    """
+    dfs = []
+    for candidate in candidates:
+        df = pd.read_json(candidate)
+        dfs.append(df)
+    
+    contributions = pd.concat(dfs)
+
+    return contributions
+
+
+def process_contributions(json_file, period_start, period_end):
     """
     Takes a JSON file of clean campaign contributions data,
     loads it into a Pandas data frame, converts dates from strings,
@@ -16,17 +37,18 @@ def process_df(json_file, period_start, period_end):
     Returns:
         df (Pandas dataframe): campaign contributions from the specified period
     """
+    df = pd.read_json(json_file)
+
     start = pd.to_datetime(period_start)
     end = pd.to_datetime(period_end)
 
-    df = pd.read_json(json_file)
     df["received_date"] = pd.to_datetime(df["received_date"])
-
-    outside_period = df[ (df["received_date"] < start) |
-    df["received_date"] > end].index
+    outside_period = df[ (df["received_date"] < start) | 
+        (df["received_date"] > end) ].index
     df.drop(outside_period, inplace=True)
-
+    
     return df
+
 
 def summary_stats(df, zips, stats_file):
     """
@@ -41,9 +63,6 @@ def summary_stats(df, zips, stats_file):
     stats = []
 
     for zip in zips:
-        # Is making a new, zip-specific dataframe the best way to go here?
-        # It would take more code to tell Pandas just to do operations for rows 
-        # with a certain zip value...
         zip_data = df["zip"] == zip
         zip_stats = {}
         zip_stats["zip"] = zip_data
@@ -56,11 +75,12 @@ def summary_stats(df, zips, stats_file):
     
     with open(stats_file, "w") as sf:
         json.dump(stats, sf, indent=1)
-        
 
-# References (process_df):
+
+# References (process_contributions):
 # https://sparkbyexamples.com/pandas/pandas-change-string-object-to-date-in-dataframe/
 # https://www.geeksforgeeks.org/drop-rows-from-the-dataframe-based-on-certain-condition-applied-on-a-column/
+# https://stackoverflow.com/questions/36921951/truth-value-of-a-series-is-ambiguous-use-a-empty-a-bool-a-item-a-any-o
 
 # Reference (summary_stats):
 # https://stackoverflow.com/questions/13784192/creating-an-empty-pandas-dataframe-and-then-filling-it
