@@ -1,4 +1,3 @@
-from pathlib import Path
 
 # Run `python3 -m campaigns` in `30122-project-the-civic-side` (top level)
 # `app.py`, which uses SAVED_PAGES is in `campaigns`
@@ -8,10 +7,10 @@ from pathlib import Path
 # And "30122-project-the-civic-side/campaigns/saved_pages/chico.html" throws
 # `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3: No module named campaigns`
 
-chico_page = Path("30122-project-the-civic-side/campaigns/saved_pages/chico.html")
-chico_data = Path("campaigns/contributions/chico_test_cl.json")
-daley_page = Path("campaigns/saved_pages/daley.html")
-daley_data = Path("campaigns/contributions/daley_test_cl.json")
+chico_page = "campaigns/saved-pages/chico.html"
+chico_data = "campaigns/contributions/chico_test_cl.json"
+daley_page = "campaigns/saved-pages/daley.html"
+daley_data = "campaigns/contributions/daley_test_cl.json"
 
 SAVED_PAGES = [
     (chico_page, chico_data),
