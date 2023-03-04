@@ -1,13 +1,11 @@
 import json
 import lxml.html
 
-
 def get_contributions(saved_page):
     """
     Takes an HTML file saved from a committee contributions page and returns
     a list of dictionaries (one dictionary per contribution).
     """
-
     with open(saved_page) as sp:
         root = lxml.html.fromstring(sp.read())
 
