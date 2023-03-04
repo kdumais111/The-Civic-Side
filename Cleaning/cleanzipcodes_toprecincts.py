@@ -32,5 +32,6 @@ def Map_Zip_to_Precinct(filename, zipfile):
     zips= geopandas.read_file(zipfile)
     overlap= geopandas.sjoin(precincts, zips)
     trimmed_overlap = overlap[["ward","precinct","zip"]]
-    return trimmed_overlap.to_csv(pathlib.Path(__file__).parent /"clean_zipcode"\
-                                  "_precinct.csv", index=False)
+    return trimmed_overlap.to_csv(pathlib.Path(__file__
+                                               ).parent /"clean_zipcode_precinct.csv",
+                                                index=False)

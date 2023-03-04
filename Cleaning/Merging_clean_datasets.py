@@ -15,7 +15,7 @@ def execute_data_merge():
     '''
     #Create Clean Datasets
     create_311_clean_csvs()
-    #build_zip_precinct_csv()
+    build_zip_precinct_csv()
     clean_voter_turnout()
     clean_zillow_to_csv()
    
@@ -28,9 +28,10 @@ def execute_data_merge():
     complaints= pathlib.Path(__file__
                 ).parent /"311_complaint_count.csv"
     add_complaints = combine_data_zip(voting_housing, complaints, "zipcode")
+    complete = add_complaints.drop(add_complaints.columns[3], axis=1)
 
     # Make csv
-    add_complaints.to_csv("merged.csv", index=False)
+    complete.to_csv("merged.csv", index=False)
     return print("data clean and merge complete")
 
 def voting_to_zipcode():
