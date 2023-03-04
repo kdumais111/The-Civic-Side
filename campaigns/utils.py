@@ -1,6 +1,12 @@
 from pathlib import Path
 
-chico_page = Path("/Users/fvescia/Desktop/122/30122-project-the-civic-side/campaigns/saved_pages/chico.html")
+# Run `python3 -m campaigns` in `30122-project-the-civic-side` (top level)
+# `app.py`, which uses SAVED_PAGES is in `campaigns`
+# Based on this^, I would expect either "campaigns/saved_pages/<file>.html"
+# or "/saved_pages/<file>.html" to access a file in `saved_pages`,
+# but both paths throw `FileNotFoundError: [Errno 2] No such file or directory`
+
+chico_page = Path("campaigns/saved_pages/chico.html")
 chico_data = Path("campaigns/contributions/chico_test_cl.json")
 daley_page = Path("campaigns/saved_pages/daley.html")
 daley_data = Path("campaigns/contributions/daley_test_cl.json")
