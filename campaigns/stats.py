@@ -43,12 +43,15 @@ def chi_stats(stats_file, chi_file):
         by_zip = pd.read_json(sf)
 
     chi = {}
-    # .sum() returns int64, which is not JSON serializable
+    # Pandas methods return numpy.float64 objects, which are not JSON serializable -->
+    # cast to float
     chi["num_donations"] = float(by_zip["num_donations"].sum())
-    chi["total_donated"] = by_zip["total_donated"].sum()
-    chi["min_donation"] = by_zip["min_donation"].min()
-    chi["max_donation"] = by_zip["max_donation"].max()
-    chi["avg_donation"] = (chi["total_donated"] / chi["num_donations"])
+    chi["avg_num_donations_per_zip"] = (chi["num_donations"] / len(by_zip)) # Is this useful?
+    chi["total_donated"] = float(by_zip["total_donated"].sum())
+    chi["avg_donated_per_zip"] = float(chi["total_donated"] / len(by_zip)) # Is this useful?
+    chi["min_donation"] = float(by_zip["min_donation"].min())
+    chi["max_donation"] = float(by_zip["max_donation"].max())
+    chi["avg_donation"] = float((chi["total_donated"] / chi["num_donations"]))
 
     with open(chi_file, "w") as cf:
         json.dump(chi, cf, indent=1)
