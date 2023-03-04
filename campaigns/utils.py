@@ -1,36 +1,40 @@
 
-# Run `python3 -m campaigns` in `30122-project-the-civic-side` (top level)
-# `app.py`, which uses SAVED_PAGES is in `campaigns`
-# Based on this^, I would expect either "campaigns/saved_pages/<file>.html"
-# or "/saved_pages/<file>.html" to access a file in `saved_pages`,
-# but both paths throw `FileNotFoundError: [Errno 2] No such file or directory`
-# And "30122-project-the-civic-side/campaigns/saved_pages/chico.html" throws
-# `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3: No module named campaigns`
-
+# HTML from BOE website
 chico_page = "campaigns/saved-pages/chico.html"
-chico_data = "campaigns/contributions/chico_test_cl.json"
 daley_page = "campaigns/saved-pages/daley.html"
-daley_data = "campaigns/contributions/daley_test_cl.json"
+enyia_page = "campaigns/saved-pages/enyia.html"
+joyce_page = "campaigns/saved-pages/joyce.html"
+lightfoot_page = "campaigns/saved-pages/lightfoot.html"
+mendoza_page = "campaigns/saved-pages/mendoza.html"
+preckwinkle_page = "campaigns/saved-pages/preckwinkle.html"
+vallas_page = "campaigns/saved-pages/vallas.html"
+wilson_page = "campaigns/saved-pages/wilson.html"
 
-SAVED_PAGES = [
-    (chico_page, chico_data),
-    (daley_page, daley_data)
+# Destination files for raw scraped data
+chico_raw = "campaigns/contributions/chico.json"
+daley_raw = "campaigns/contributions/daley.json"
+enyia_raw = "campaigns/contributions/enyia.json"
+joyce_raw = "campaigns/contributions/joyce.json"
+lightfoot_raw = "campaigns/contributions/lightfoot.json"
+mendoza_raw = "campaigns/contributions/mendoza.json"
+preckwinkle_raw = "campaigns/contributions/preckwinkle.json"
+vallas_raw = "campaigns/contributions/vallas.json"
+wilson_raw = "campaigns/contributions/wilson.json"
+
+PAGES_TO_SCRAPE = [
+    (chico_page, chico_raw),
+    (daley_page, daley_raw),
+    (enyia_page, enyia_raw),
+    (joyce_page, joyce_raw),
+    (lightfoot_page, lightfoot_raw),
+    (mendoza_page, mendoza_raw),
+    (preckwinkle_page, preckwinkle_raw),
+    (vallas_page, vallas_raw),
+    (wilson_page, wilson_raw)
 ]
 
 START = "11/26/2018" # Start of 2019 candidate filing period
 END = "12/31/2019" # End of 2019 election cycle
-
-CAND_FILES = [
-    "contributions/chico-clean.json",
-    "contributions/daley-clean.json",
-    "contributions/enyia-clean.json",
-    "contributions/joyce-clean.json",
-    "contributions/lightfoot-clean.json",
-    "contributions/mendoza-clean.json",
-    "contributions/preckwinkle-clean.json",
-    "contributions/vallas-clean.json",
-    "contributions/wilson-clean.json",
-]
 
 ZIP_INTS = [60647, 60622, 60642, 60611, 60610, 60654, 60614, 60615, 60653,
     60616, 60609, 60605, 60604, 60649, 60619, 60637, 60621, 60620,
