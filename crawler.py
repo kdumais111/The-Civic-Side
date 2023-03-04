@@ -20,12 +20,11 @@ def get_contributions(saved_page):
     for row in rows:
         contribution = {}
         cells = row.cssselect("td")
-        contribution["donor_name"] = cells[0].text
         # .text only returns the first line of text if a cell has breaks
         # .text_content() returns a lxml.etree._ElementUnicodeResult
+        contribution["donor_name"] = cells[0].text
         # donor_info is name, address, and sometimes occupation and employer
         # clean() in cleanup.py deletes name and extracts address
-        # TODO: decide whether to extract occupation and employer, too
         contribution["donor_info"] = str(cells[0].text_content())
         contribution["amount"] = str(cells[1].text_content())
         contribution["received_date"] = str(cells[2].text_content())
@@ -33,7 +32,6 @@ def get_contributions(saved_page):
         contribution["contribution_type"] = cells[4].text
         contribution["received_by"] = cells[4][1].text
         contribution["description"] = str(cells[5].text_content())
-        # TODO if time: figure out why cells[6].text_content() returns unicode space characters?
         contribution["vendor_name"] = str(cells[6].text_content())
 
         contributions.append(contribution)
@@ -50,7 +48,3 @@ def save_contributions(contributions, file_name):
     """
     with open(file_name, "w") as f:
         json.dump(contributions, f, indent=4)
-
-# Notes:
-# Not common, but a contribution can be described as a refund -
-# what does that mean in this context?
