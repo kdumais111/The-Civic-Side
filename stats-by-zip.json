@@ -1,0 +1,474 @@
+[
+ {
+  "zip": "60647",
+  "num_donations": 14,
+  "total_donated": 20700.0,
+  "min_donation": 200.0,
+  "max_donation": 5000.0,
+  "avg_donation": 1478.5714285714287
+ },
+ {
+  "zip": "60622",
+  "num_donations": 14,
+  "total_donated": 12100.0,
+  "min_donation": 100.0,
+  "max_donation": 2500.0,
+  "avg_donation": 864.2857142857143
+ },
+ {
+  "zip": "60642",
+  "num_donations": 8,
+  "total_donated": 16950.0,
+  "min_donation": 200.0,
+  "max_donation": 10000.0,
+  "avg_donation": 2118.75
+ },
+ {
+  "zip": "60611",
+  "num_donations": 97,
+  "total_donated": 430850.0,
+  "min_donation": 100.0,
+  "max_donation": 50000.0,
+  "avg_donation": 4441.7525773195875
+ },
+ {
+  "zip": "60610",
+  "num_donations": 67,
+  "total_donated": 115622.7,
+  "min_donation": 40.0,
+  "max_donation": 10000.0,
+  "avg_donation": 1725.7119402985074
+ },
+ {
+  "zip": "60654",
+  "num_donations": 48,
+  "total_donated": 152460.74,
+  "min_donation": 45.0,
+  "max_donation": 50000.0,
+  "avg_donation": 3176.2654166666666
+ },
+ {
+  "zip": "60614",
+  "num_donations": 64,
+  "total_donated": 104067.0,
+  "min_donation": 50.0,
+  "max_donation": 12500.0,
+  "avg_donation": 1626.046875
+ },
+ {
+  "zip": "60615",
+  "num_donations": 12,
+  "total_donated": 35755.0,
+  "min_donation": 5.0,
+  "max_donation": 25000.0,
+  "avg_donation": 2979.5833333333335
+ },
+ {
+  "zip": "60653",
+  "num_donations": 1,
+  "total_donated": 750.0,
+  "min_donation": 750.0,
+  "max_donation": 750.0,
+  "avg_donation": 750.0
+ },
+ {
+  "zip": "60616",
+  "num_donations": 23,
+  "total_donated": 36850.0,
+  "min_donation": 100.0,
+  "max_donation": 10000.0,
+  "avg_donation": 1602.1739130434783
+ },
+ {
+  "zip": "60609",
+  "num_donations": 16,
+  "total_donated": 20050.0,
+  "min_donation": 200.0,
+  "max_donation": 5000.0,
+  "avg_donation": 1253.125
+ },
+ {
+  "zip": "60605",
+  "num_donations": 22,
+  "total_donated": 19050.0,
+  "min_donation": 35.0,
+  "max_donation": 5000.0,
+  "avg_donation": 865.9090909090909
+ },
+ {
+  "zip": "60604",
+  "num_donations": 14,
+  "total_donated": 25147.82,
+  "min_donation": 250.0,
+  "max_donation": 10000.0,
+  "avg_donation": 1796.2728571428572
+ },
+ {
+  "zip": "60649",
+  "num_donations": 1,
+  "total_donated": 1000.0,
+  "min_donation": 1000.0,
+  "max_donation": 1000.0,
+  "avg_donation": 1000.0
+ },
+ {
+  "zip": "60619",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60637",
+  "num_donations": 13,
+  "total_donated": 3840.0,
+  "min_donation": 35.0,
+  "max_donation": 1000.0,
+  "avg_donation": 295.38461538461536
+ },
+ {
+  "zip": "60621",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60620",
+  "num_donations": 1,
+  "total_donated": 250.0,
+  "min_donation": 250.0,
+  "max_donation": 250.0,
+  "avg_donation": 250.0
+ },
+ {
+  "zip": "60617",
+  "num_donations": 4,
+  "total_donated": 6200.0,
+  "min_donation": 200.0,
+  "max_donation": 5000.0,
+  "avg_donation": 1550.0
+ },
+ {
+  "zip": "60628",
+  "num_donations": 1,
+  "total_donated": 300.0,
+  "min_donation": 300.0,
+  "max_donation": 300.0,
+  "avg_donation": 300.0
+ },
+ {
+  "zip": "60827",
+  "num_donations": 1,
+  "total_donated": 1000.0,
+  "min_donation": 1000.0,
+  "max_donation": 1000.0,
+  "avg_donation": 1000.0
+ },
+ {
+  "zip": "60643",
+  "num_donations": 10,
+  "total_donated": 8850.0,
+  "min_donation": 100.0,
+  "max_donation": 2500.0,
+  "avg_donation": 885.0
+ },
+ {
+  "zip": "60633",
+  "num_donations": 1,
+  "total_donated": 150.0,
+  "min_donation": 150.0,
+  "max_donation": 150.0,
+  "avg_donation": 150.0
+ },
+ {
+  "zip": "60608",
+  "num_donations": 17,
+  "total_donated": 21350.0,
+  "min_donation": 100.0,
+  "max_donation": 5000.0,
+  "avg_donation": 1255.8823529411766
+ },
+ {
+  "zip": "60632",
+  "num_donations": 5,
+  "total_donated": 27500.0,
+  "min_donation": 250.0,
+  "max_donation": 25000.0,
+  "avg_donation": 5500.0
+ },
+ {
+  "zip": "60629",
+  "num_donations": 4,
+  "total_donated": 1950.0,
+  "min_donation": 300.0,
+  "max_donation": 750.0,
+  "avg_donation": 487.5
+ },
+ {
+  "zip": "60638",
+  "num_donations": 19,
+  "total_donated": 8725.0,
+  "min_donation": 5.0,
+  "max_donation": 5000.0,
+  "avg_donation": 459.2105263157895
+ },
+ {
+  "zip": "60636",
+  "num_donations": 6,
+  "total_donated": 3600.0,
+  "min_donation": 200.0,
+  "max_donation": 1000.0,
+  "avg_donation": 600.0
+ },
+ {
+  "zip": "60652",
+  "num_donations": 1,
+  "total_donated": 2000.0,
+  "min_donation": 2000.0,
+  "max_donation": 2000.0,
+  "avg_donation": 2000.0
+ },
+ {
+  "zip": "60655",
+  "num_donations": 10,
+  "total_donated": 3650.0,
+  "min_donation": 50.0,
+  "max_donation": 1000.0,
+  "avg_donation": 365.0
+ },
+ {
+  "zip": "60623",
+  "num_donations": 7,
+  "total_donated": 37400.0,
+  "min_donation": 1500.0,
+  "max_donation": 21100.0,
+  "avg_donation": 5342.857142857143
+ },
+ {
+  "zip": "60644",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60624",
+  "num_donations": 4,
+  "total_donated": 3500.0,
+  "min_donation": 500.0,
+  "max_donation": 1500.0,
+  "avg_donation": 875.0
+ },
+ {
+  "zip": "60612",
+  "num_donations": 6,
+  "total_donated": 13000.0,
+  "min_donation": 500.0,
+  "max_donation": 5000.0,
+  "avg_donation": 2166.6666666666665
+ },
+ {
+  "zip": "60607",
+  "num_donations": 31,
+  "total_donated": 92115.98,
+  "min_donation": 200.0,
+  "max_donation": 25000.0,
+  "avg_donation": 2971.4832258064516
+ },
+ {
+  "zip": "60639",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60651",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60661",
+  "num_donations": 21,
+  "total_donated": 31700.0,
+  "min_donation": 100.0,
+  "max_donation": 10000.0,
+  "avg_donation": 1509.5238095238096
+ },
+ {
+  "zip": "60634",
+  "num_donations": 10,
+  "total_donated": 8200.0,
+  "min_donation": 100.0,
+  "max_donation": 2500.0,
+  "avg_donation": 820.0
+ },
+ {
+  "zip": "60707",
+  "num_donations": 6,
+  "total_donated": 3250.0,
+  "min_donation": 250.0,
+  "max_donation": 1000.0,
+  "avg_donation": 541.6666666666666
+ },
+ {
+  "zip": "60618",
+  "num_donations": 18,
+  "total_donated": 14450.0,
+  "min_donation": 200.0,
+  "max_donation": 2500.0,
+  "avg_donation": 802.7777777777778
+ },
+ {
+  "zip": "60641",
+  "num_donations": 10,
+  "total_donated": 9000.0,
+  "min_donation": 50.0,
+  "max_donation": 5000.0,
+  "avg_donation": 900.0
+ },
+ {
+  "zip": "60657",
+  "num_donations": 37,
+  "total_donated": 67278.07,
+  "min_donation": 100.0,
+  "max_donation": 20000.0,
+  "avg_donation": 1818.3262162162164
+ },
+ {
+  "zip": "60625",
+  "num_donations": 8,
+  "total_donated": 16600.0,
+  "min_donation": 100.0,
+  "max_donation": 10000.0,
+  "avg_donation": 2075.0
+ },
+ {
+  "zip": "60630",
+  "num_donations": 9,
+  "total_donated": 10450.0,
+  "min_donation": 200.0,
+  "max_donation": 2500.0,
+  "avg_donation": 1161.111111111111
+ },
+ {
+  "zip": "60606",
+  "num_donations": 26,
+  "total_donated": 131146.05,
+  "min_donation": 250.0,
+  "max_donation": 100000.0,
+  "avg_donation": 5044.078846153846
+ },
+ {
+  "zip": "60602",
+  "num_donations": 15,
+  "total_donated": 18000.0,
+  "min_donation": 100.0,
+  "max_donation": 5000.0,
+  "avg_donation": 1200.0
+ },
+ {
+  "zip": "60603",
+  "num_donations": 27,
+  "total_donated": 1243708.2,
+  "min_donation": 250.0,
+  "max_donation": 1000000.0,
+  "avg_donation": 46063.26666666666
+ },
+ {
+  "zip": "60601",
+  "num_donations": 47,
+  "total_donated": 103876.28,
+  "min_donation": 100.0,
+  "max_donation": 50000.0,
+  "avg_donation": 2210.1336170212767
+ },
+ {
+  "zip": "60656",
+  "num_donations": 10,
+  "total_donated": 6850.0,
+  "min_donation": 100.0,
+  "max_donation": 1500.0,
+  "avg_donation": 685.0
+ },
+ {
+  "zip": "60646",
+  "num_donations": 24,
+  "total_donated": 19430.0,
+  "min_donation": 20.0,
+  "max_donation": 5000.0,
+  "avg_donation": 809.5833333333334
+ },
+ {
+  "zip": "60659",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60645",
+  "num_donations": 0,
+  "total_donated": 0.0,
+  "min_donation": 0,
+  "max_donation": 0,
+  "avg_donation": 0
+ },
+ {
+  "zip": "60626",
+  "num_donations": 2,
+  "total_donated": 3000.0,
+  "min_donation": 1500.0,
+  "max_donation": 1500.0,
+  "avg_donation": 1500.0
+ },
+ {
+  "zip": "60660",
+  "num_donations": 8,
+  "total_donated": 6350.0,
+  "min_donation": 50.0,
+  "max_donation": 5000.0,
+  "avg_donation": 793.75
+ },
+ {
+  "zip": "60640",
+  "num_donations": 12,
+  "total_donated": 16350.0,
+  "min_donation": 50.0,
+  "max_donation": 5000.0,
+  "avg_donation": 1362.5
+ },
+ {
+  "zip": "60631",
+  "num_donations": 17,
+  "total_donated": 42950.0,
+  "min_donation": 100.0,
+  "max_donation": 10000.0,
+  "avg_donation": 2526.470588235294
+ },
+ {
+  "zip": "60706",
+  "num_donations": 2,
+  "total_donated": 3500.0,
+  "min_donation": 1500.0,
+  "max_donation": 2000.0,
+  "avg_donation": 1750.0
+ },
+ {
+  "zip": "60613",
+  "num_donations": 19,
+  "total_donated": 16185.0,
+  "min_donation": 35.0,
+  "max_donation": 5000.0,
+  "avg_donation": 851.8421052631579
+ }
+]
