@@ -17,7 +17,7 @@ shape_file = "Cleaning/Datasets/zip_geojson.geojson"
 #                     color="votingrates", 
 #                     projection="mercator")
 
-fig = px.choropleth_mapbox(df, geojson=shape_file, locations="zip", featureidkey="properties.zip",
+fig = px.choropleth_mapbox(df, geojson=shape_file, locations="zipcode", featureidkey="properties.zip",
                            color="votingrates", mapbox_style="carto-positron", center={"lat":41.8, "lon": -87.75}
                    )
 

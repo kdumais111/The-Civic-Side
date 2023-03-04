@@ -28,13 +28,13 @@ def execute_data_merge():
     complaints= pathlib.Path(__file__
                 ).parent /"311_complaint_count.csv"
     add_complaints = combine_data_zip(voting_housing, complaints, "zipcode")
-    campaign = pathlib.Path(__file__
-                ).resolve().parents[1] /"campaigns/contributions/stats_by_zip.json"
-    add_campaign = combine_data_zip(add_complaints, campaign, "zip")
-    complete = add_campaign.drop(add_campaign.columns[3], axis=1)
+    #campaign = pathlib.Path(__file__
+                #).resolve().parents[1] /"campaigns/contributions/stats_by_zip.json"
+    #add_campaign = combine_data_zip(add_complaints, campaign, "zip")
+    #complete = add_complaints.drop(add_complaints.columns[3], axis=1)
 
     # Make csv
-    complete.to_csv("merged.csv", index=False)
+    add_complaints.to_csv("merged.csv", index=False)
     return print("data clean and merge complete")
 
 def voting_to_zipcode():
