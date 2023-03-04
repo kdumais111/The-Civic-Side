@@ -28,7 +28,10 @@ def execute_data_merge():
     complaints= pathlib.Path(__file__
                 ).parent /"311_complaint_count.csv"
     add_complaints = combine_data_zip(voting_housing, complaints, "zipcode")
-    complete = add_complaints.drop(add_complaints.columns[3], axis=1)
+    campaign = pathlib.Path(__file__
+                ).resolve().parents[1] /"campaigns/contributions/stats_by_zip.json"
+    add_campaign = combine_data_zip(add_complaints, campaign, "zip")
+    complete = add_campaign.drop(add_campaign.columns[3], axis=1)
 
     # Make csv
     complete.to_csv("merged.csv", index=False)
@@ -59,7 +62,10 @@ def combine_data_zip(df, filename, column):
     Takes a dataframe and adds data from a CSV, joining by zipcode.
     Returns merged dataframe.
     '''
-    new_data = pd.read_csv(filename)
+    if "json" in str(filename):
+        new_data= pd.read_json(filename)
+    else:
+        new_data = pd.read_csv(filename)
     merged_set = pd.merge(df, new_data, left_on = "zip", 
                     right_on = column, how = "left").drop(columns = [column])
     merged_set = merged_set.dropna()
