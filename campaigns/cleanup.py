@@ -8,9 +8,9 @@ def clean(json_file):
     """
     Takes a JSON file of campaign contributions data (json_file), cleans the data,
     and saves it to a new JSON file. (The new file name is the file name from json_file
-    with "-clean" added as a suffix.)
+    with "_clean" added as a suffix.)
     """
-    clean_file = json_file.split(".")[0] + "-clean.json"
+    clean_file = json_file.split(".")[0] + "_clean.json"
 
     with open(json_file) as jf:
         contributions = json.load(jf)
