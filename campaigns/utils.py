@@ -5,8 +5,10 @@ from pathlib import Path
 # Based on this^, I would expect either "campaigns/saved_pages/<file>.html"
 # or "/saved_pages/<file>.html" to access a file in `saved_pages`,
 # but both paths throw `FileNotFoundError: [Errno 2] No such file or directory`
+# And "30122-project-the-civic-side/campaigns/saved_pages/chico.html" throws
+# `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3: No module named campaigns`
 
-chico_page = Path("campaigns/saved_pages/chico.html")
+chico_page = Path("30122-project-the-civic-side/campaigns/saved_pages/chico.html")
 chico_data = Path("campaigns/contributions/chico_test_cl.json")
 daley_page = Path("campaigns/saved_pages/daley.html")
 daley_data = Path("campaigns/contributions/daley_test_cl.json")
