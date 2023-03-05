@@ -1,17 +1,15 @@
 import pandas as pd
 import json
 
-def contribution_stats(df, zips, zips_only, zips_and_city):
+def contribution_stats(df, zips, stats_file):
     """
-    Genereates summary statistics by city zip code (zips) and for the city 
-    as a whole, and writes them to two JSON files, one with zip-level data only
-    (for choropleths) and one with zip- and city-level data (for tables).
+    Genereates campaign contribution summary statistics by city zip code (zips)
+    and saves the stats to a JSON file (stats_file).
 
     Inputs:
         df (Pandas dataframe): data to generate summary stats from
         zips (lst of strs): zip codes to generate summary stats for
-        zip_only (str): JSON filename (e.g., "stats_by_zip.json")
-        zip_and_city (str): JSON filename (e.g., "stats_by_zip_and_city.json")
+        stats_file (str) JSON filename (e.g., "contributions_by_zip.json")
 
     """
     stats = []
@@ -34,27 +32,8 @@ def contribution_stats(df, zips, zips_only, zips_and_city):
 
         stats.append(zip_stats)
     
-    with open(zips_only, "w") as sf:
+    with open(stats_file, "w") as sf:
         json.dump(stats, sf, indent=1)
-
-    # aggregate zip-level stats to city level
-    with open(zips_only):
-        by_zip = pd.read_json(zips_only)
-
-    chi = {}
-    chi["zip"] = "Chicago"
-    chi["num_donations"] = float(by_zip["num_donations"].sum())
-    chi["avg_num_donations_per_zip"] = (chi["num_donations"] / len(by_zip)) # Is this useful?
-    chi["total_donated"] = float(by_zip["total_donated"].sum())
-    chi["avg_donated_per_zip"] = float(chi["total_donated"] / len(by_zip)) # Is this useful?
-    chi["min_donation"] = float(by_zip["min_donation"].min())
-    chi["max_donation"] = float(by_zip["max_donation"].max())
-    chi["avg_donation"] = float((chi["total_donated"] / chi["num_donations"]))
-
-    stats.append(chi)
-
-    with open(zips_and_city, "w") as zc:
-        json.dump(stats, zc, indent=1)
 
 
 # References:
