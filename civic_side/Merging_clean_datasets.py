@@ -90,5 +90,4 @@ def get_campaigns_data():
     contributions = merge_candidates(clean_files)
     processed_contributions = process_contributions(contributions, START, END)
     contribution_stats(processed_contributions, ZIP_STRS, 
-                       "civic_side/campaigns/contributions/stats_by_zip.json",
-                       "civic_side/campaigns/contributions/stats_by_zip_and_city.json")
+                       "civic_side/campaigns/contributions/contributions_by_zip.json")
