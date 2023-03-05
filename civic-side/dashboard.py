@@ -3,13 +3,14 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import geopandas as gpd
+# Libraries above this line are in our poetry folder; libraries below it
+# are throwing `Could not find a matching version of package < package name >`
+# when FV run's `poetry add < package name >`
 from urllib.request import urlopen
 import json
 import plotly.graph_objects as go
 
 # We need to make sure all libraries above are in Poetry plus jupiter notebooks
-
-
 
 # Figures are represented as trees with named nodes called "attributes". 
 # The root node of the tree has three top-level attributes: data, layout and frames.
