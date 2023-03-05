@@ -91,3 +91,4 @@ def get_campaigns_data():
     processed_contributions = process_contributions(contributions, START, END)
     contribution_stats(processed_contributions, ZIP_STRS, 
                        "civic_side/campaigns/contributions/contributions_by_zip.json")
+        
