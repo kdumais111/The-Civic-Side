@@ -1,22 +1,26 @@
 import pandas as pd
 import json
 
-def zip_stats(df, zips, stats_file):
+def contribution_stats(df, zips, zips_only, zips_and_city):
     """
-    Genereates summary statistics for the specified zip codes and
-    saves them to a JSON file.
+    Genereates summary statistics by city zip code (zips) and for the city 
+    as a whole, and writes them to two JSON files, one with zip-level data only
+    (for choropleths) and one with zip- and city-level data (for tables).
 
     Inputs:
         df (Pandas dataframe): data to generate summary stats from
         zips (lst of strs): zip codes to generate summary stats for
-        stats_file (str): JSON filename (e.g., "summary-stats.JSON")
+        zip_only (str): JSON filename (e.g., "stats_by_zip.json")
+        zip_and_city (str): JSON filename (e.g., "stats_by_zip_and_city.json")
+
     """
     stats = []
 
-    for zip in zips:
-        zip_data = df[df["zip"] == zip]
+    # get zip-level stats
+    for zp in zips:
+        zip_data = df[df["zip"] == zp]
         zip_stats = {}
-        zip_stats["zip"] = zip
+        zip_stats["zip"] = zp
         zip_stats["num_donations"] = len(zip_data)
         zip_stats["total_donated"] = zip_data["amount"].sum()
         if zip_stats["num_donations"] == 0:
@@ -30,21 +34,15 @@ def zip_stats(df, zips, stats_file):
 
         stats.append(zip_stats)
     
-    with open(stats_file, "w") as sf:
+    with open(zips_only, "w") as sf:
         json.dump(stats, sf, indent=1)
 
-def chi_stats(stats_file, chi_file):
-    """
-    Takes a JSON file of statistics by Chicago zip code (stats_file), aggregates
-    the statistics to the city level, and saves the aggregated data to a JSON file
-    (chi_file).
-    """
-    with open(stats_file) as sf:
-        by_zip = pd.read_json(sf)
+    # aggregate zip-level stats to city level
+    with open(zips_only):
+        by_zip = pd.read_json(zips_only)
 
     chi = {}
-    # Pandas methods return numpy.float64 objects, which are not JSON serializable -->
-    # cast to float
+    chi["zip"] = "Chicago"
     chi["num_donations"] = float(by_zip["num_donations"].sum())
     chi["avg_num_donations_per_zip"] = (chi["num_donations"] / len(by_zip)) # Is this useful?
     chi["total_donated"] = float(by_zip["total_donated"].sum())
@@ -53,10 +51,12 @@ def chi_stats(stats_file, chi_file):
     chi["max_donation"] = float(by_zip["max_donation"].max())
     chi["avg_donation"] = float((chi["total_donated"] / chi["num_donations"]))
 
-    with open(chi_file, "w") as cf:
-        json.dump(chi, cf, indent=1)
+    stats.append(chi)
+
+    with open(zips_and_city, "w") as zc:
+        json.dump(stats, zc, indent=1)
 
 
-# References (summary_stats):
+# References:
 # https://stackoverflow.com/questions/13784192/creating-an-empty-pandas-dataframe-and-then-filling-it
 # https://stackoverflow.com/questions/47333227/pandas-valueerror-cannot-convert-float-nan-to-integer
