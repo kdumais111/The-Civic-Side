@@ -1,14 +1,14 @@
 
 # HTML from BOE website
-chico_page = "campaigns/saved-pages/chico.html"
-daley_page = "campaigns/saved-pages/daley.html"
-enyia_page = "campaigns/saved-pages/enyia.html"
-joyce_page = "campaigns/saved-pages/joyce.html"
-lightfoot_page = "campaigns/saved-pages/lightfoot.html"
-mendoza_page = "campaigns/saved-pages/mendoza.html"
+chico_page = "campaigns/saved_pages/chico.html"
+daley_page = "campaigns/saved_pages/daley.html"
+enyia_page = "campaigns/saved_pages/enyia.html"
+joyce_page = "campaigns/saved_pages/joyce.html"
+lightfoot_page = "campaigns/saved_pages/lightfoot.html"
+mendoza_page = "campaigns/saved_pages/mendoza.html"
 preckwinkle_page = "campaigns/saved-pages/preckwinkle.html"
-vallas_page = "campaigns/saved-pages/vallas.html"
-wilson_page = "campaigns/saved-pages/wilson.html"
+vallas_page = "campaigns/saved_pages/vallas.html"
+wilson_page = "campaigns/saved_pages/wilson.html"
 
 # Destination files for raw scraped data
 chico_raw = "campaigns/contributions/chico.json"
