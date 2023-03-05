@@ -1,15 +1,15 @@
 import pandas as pd
 import pathlib
 
-from the_polis._311_Dataset_Cleaning import create_311_clean_csvs
-from the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
-from the_polis.voterturnout_cleaning import clean_voter_turnout
-from the_polis.zillowcleaning import clean_zillow_to_csv
+from civic_side.the_polis._311_Dataset_Cleaning import create_311_clean_csvs
+from civic_side.the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
+from civic_side.the_polis.voterturnout_cleaning import clean_voter_turnout
+from civic_side.the_polis.zillowcleaning import clean_zillow_to_csv
 
-from campaigns.crawler import get_contributions, save_contributions
-from campaigns.cleanup import clean, merge_candidates, process_contributions
-from campaigns.stats import zip_stats, chi_stats
-from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
+from civic_side.campaigns.crawler import get_contributions, save_contributions
+from civic_side.campaigns.cleanup import clean, merge_candidates, process_contributions
+from civic_side.campaigns.stats import zip_stats, chi_stats
+from civic_side.campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 
 
 # Campaign cleaning functions written by Francesca Vescia
