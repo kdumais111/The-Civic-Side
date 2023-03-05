@@ -8,7 +8,7 @@ from .the_polis.zillowcleaning import clean_zillow_to_csv
 
 from campaigns.crawler import get_contributions, save_contributions
 from campaigns.cleanup import clean, merge_candidates, process_contributions
-from campaigns.stats import zip_stats, chi_stats
+from campaigns.stats import contribution_stats
 from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 
 
