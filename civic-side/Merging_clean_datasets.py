@@ -1,13 +1,14 @@
 import pandas as pd
 import pathlib
 
-from ._311_Dataset_Cleaning import create_311_clean_csvs
-from .cleanzipcodes_toprecincts import build_zip_precinct_csv
-from .voterturnout_cleaning import clean_voter_turnout
-from .zillowcleaning import clean_zillow_to_csv
+from the_polis._311_Dataset_Cleaning import create_311_clean_csvs
+from the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
+from the_polis.voterturnout_cleaning import clean_voter_turnout
+from the_polis.zillowcleaning import clean_zillow_to_csv
 
-#Code written by Katherine Dumais
 
+# Campaign cleaning functions written by Francesca Vescia
+# Merging structure and csv cleaning functions written by Katherine Dumais
 
 def execute_data_merge():
     '''
