@@ -1,25 +1,25 @@
 
 # HTML from BOE website
-chico_page = "campaigns/saved_pages/chico.html"
-daley_page = "campaigns/saved_pages/daley.html"
-enyia_page = "campaigns/saved_pages/enyia.html"
-joyce_page = "campaigns/saved_pages/joyce.html"
-lightfoot_page = "campaigns/saved_pages/lightfoot.html"
-mendoza_page = "campaigns/saved_pages/mendoza.html"
-preckwinkle_page = "campaigns/saved-pages/preckwinkle.html"
-vallas_page = "campaigns/saved_pages/vallas.html"
-wilson_page = "campaigns/saved_pages/wilson.html"
+chico_page = "civic_side/campaigns/saved_pages/chico.html"
+daley_page = "civic_side/campaigns/saved_pages/daley.html"
+enyia_page = "civic_side/campaigns/saved_pages/enyia.html"
+joyce_page = "civic_side/campaigns/saved_pages/joyce.html"
+lightfoot_page = "civic_side/campaigns/saved_pages/lightfoot.html"
+mendoza_page = "civic_side/campaigns/saved_pages/mendoza.html"
+preckwinkle_page = "civic_side/campaigns/saved-pages/preckwinkle.html"
+vallas_page = "civic_side/campaigns/saved_pages/vallas.html"
+wilson_page = "civic_side/campaigns/saved_pages/wilson.html"
 
 # Destination files for raw scraped data
-chico_raw = "campaigns/contributions/chico.json"
-daley_raw = "campaigns/contributions/daley.json"
-enyia_raw = "campaigns/contributions/enyia.json"
-joyce_raw = "campaigns/contributions/joyce.json"
-lightfoot_raw = "campaigns/contributions/lightfoot.json"
-mendoza_raw = "campaigns/contributions/mendoza.json"
-preckwinkle_raw = "campaigns/contributions/preckwinkle.json"
-vallas_raw = "campaigns/contributions/vallas.json"
-wilson_raw = "campaigns/contributions/wilson.json"
+chico_raw = "civic_side/campaigns/contributions/chico.json"
+daley_raw = "civic_side/campaigns/contributions/daley.json"
+enyia_raw = "civic_side/campaigns/contributions/enyia.json"
+joyce_raw = "civic_side/campaigns/contributions/joyce.json"
+lightfoot_raw = "civic_side/campaigns/contributions/lightfoot.json"
+mendoza_raw = "civic_side/campaigns/contributions/mendoza.json"
+preckwinkle_raw = "civic_side/campaigns/contributions/preckwinkle.json"
+vallas_raw = "civic_side/campaigns/contributions/vallas.json"
+wilson_raw = "civic_side/campaigns/contributions/wilson.json"
 
 PAGES_TO_SCRAPE = [
     (chico_page, chico_raw),
