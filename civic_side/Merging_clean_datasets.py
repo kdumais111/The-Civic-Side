@@ -6,6 +6,11 @@ from the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
 from the_polis.voterturnout_cleaning import clean_voter_turnout
 from the_polis.zillowcleaning import clean_zillow_to_csv
 
+from campaigns.crawler import get_contributions, save_contributions
+from campaigns.cleanup import clean, merge_candidates, process_contributions
+from campaigns.stats import zip_stats, chi_stats
+from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
+
 
 # Campaign cleaning functions written by Francesca Vescia
 # Merging structure and csv cleaning functions written by Katherine Dumais
@@ -75,7 +80,15 @@ def combine_data_zip(df, filename, column):
     merged_set = merged_set.dropna()
     return merged_set
 
-
-
-
-
+def get_campaigns_data():
+    clean_files = []
+    for page, raw_data in PAGES_TO_SCRAPE:
+        contributions = get_contributions(page)
+        save_contributions(contributions, raw_data)
+        clean(raw_data)
+        clean_files.append(raw_data.split(".")[0] + "_clean.json")
+    contributions = merge_candidates(clean_files)
+    processed_contributions = process_contributions(contributions, START, END)
+    zip_stats(processed_contributions, ZIP_STRS, "campaigns/contributions/stats_by_zip.json")
+    chi_stats("campaigns/contributions/stats_by_zip.json", 
+              "campaigns/contributions/city_stats.json")
