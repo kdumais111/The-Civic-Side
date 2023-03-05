@@ -74,7 +74,7 @@ def complaints_csv(zip, pop):
 
     zip = zip[zip['zipcode'].isin (pop['zipcode'])]
     zip = zip.merge(pop, how = 'left', on = 'zipcode')
-    zip['per1000_compaint'] = (zip['complaintcounts'] /
+    zip['per1000_complaint'] = (zip['complaintcounts'] /
                                 zip["Population - Total"] * 1000)
     
     zip.to_csv(pathlib.Path(__file__).parent /'_311_complaint_count.csv',
