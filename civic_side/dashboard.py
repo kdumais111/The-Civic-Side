@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import geopandas as gpd
+import pathlib
 # Libraries above this line are in our poetry folder; libraries below it
 # are throwing `Could not find a matching version of package < package name >`
 # when FV run's `poetry add < package name >`
@@ -16,13 +17,13 @@ import plotly.graph_objects as go
 # The root node of the tree has three top-level attributes: data, layout and frames.
 
 #Import idea taken from Stephania and Project APWhy
-zip_url = "https://data.cityofchicago.org/api/geospatial/gdcf-axmw?method=export&format=GeoJSON"
+zip_url = "https://data.cityofchicago.org/api/geospatial/unjd-c2ca?method=export&format=GeoJSON"
 with urlopen(zip_url) as response:
     zipcodes = json.load(response)
 
 app = Dash(external_stylesheets=[dbc.themes.YETI])
 
-df = pd.read_csv("merged.csv")
+df = pd.read_csv(pathlib.Path(__file__).parent /"merged.csv")
 
 # fig = px.choropleth(df, geojson=shape_file, locations="zip", 
 #                     featureidkey="properties.zip", 
@@ -38,13 +39,13 @@ def make_cloropleth(color, default):
     Returns figure
     '''
     fig = px.choropleth_mapbox(df, geojson=zipcodes, locations="zip", featureidkey="properties.zip",
-                            color=default, mapbox_style="carto-positron", 
+                            color=default, mapbox_style="carto-positron", custom_data=[default],
                             center={"lat":41.8, "lon": -87.75,}, color_continuous_scale=color)
 
     fig.update_geos(fitbounds="locations", visible=False)
     if default == "votingrates":
         button1 =  dict(method = "restyle",
-                    args = [{'z': [ df["votingrates"] ] }],
+                    args = [{'z': [ df["votingrates"] ], }],
                     label = "Voting Rates")
         button5 = dict(method = "restyle",
                     args = [{'z': [ df["avg_donation"] ]}],
@@ -54,11 +55,13 @@ def make_cloropleth(color, default):
                     args = [{'z': [ df["votingrates"] ] }],
                     label = "Voting Rates")
         button1 = dict(method = "restyle",
-                    args = [{'z': [ df["avg_donation"] ]}],
+                    args = [{'z': [ df["avg_donation"] ],
+                             'text' : "hello"}],
                     label = "Average Donations")
 
     button2 =  dict(method = "restyle",
-                    args = [{'z': [ df["per1000_compaint"] ]}],
+                    args = [{'z': [ df["per1000_compaint"] ],
+                             'customdata' :["per1000_compaint"]}],
                     label = "3-1-1 Complaints")
     button3 =  dict(method = "restyle",
                     args = [{'z': [ df["2019avprice"] ]}],
@@ -67,13 +70,6 @@ def make_cloropleth(color, default):
     button4 = dict(method = "restyle",
                     args = [{'z': [ df["num_donations"] ]}],
                     label = "Number of Donations")
-    
-    button4 = dict(method = "restyle",
-                    args = [{'z': [ df["num_donations"] ]}],
-                    label = "Number of Donations")
-    button5 = dict(method = "restyle",
-                args = [{'z': [ df["avg_donation"] ]}],
-                label = "Average Donations")
     
 
     fig.update_layout(width=700, height=700,
@@ -93,10 +89,10 @@ def make_top_5(zipcode=None):
     '''
     Creates a table with the top 5 complaints per zipcode
     '''
-    top5=pd.read_csv("Cleaning/311_topcomplaints_byzip.csv")
+    top5=pd.read_csv( pathlib.Path(__file__).parent /"311_topcomplaints_byzip.csv")
     if zipcode == None:
-        data = top5["SR_TYPE"]
-    else: 
+        data = top5["SR_TYPE"].count()
+    else:
         data = top5["SR_TYPE"][top5["ZIP_CODE"] == zipcode]
     complaints = go.Figure(data=[go.Table(
         header=dict(values=["Top 5 311 Complaints"],
@@ -105,7 +101,7 @@ def make_top_5(zipcode=None):
                     align=['left','center'],
                     font=dict(color='black', size=16),
                     ),
-        cells=dict(values=[top5["SR_TYPE"]],
+        cells=dict(values=[data],
                 fill_color='white',
                 align='left')) 
     ])
@@ -158,7 +154,7 @@ app.layout = html.Div(
     dbc.Row([html.H3("Learn more about the individual zipcodes,"
                       " or the city in aggregate!")]),
     dbc.Row([html.Br()]),
-    dbc.Row([dcc.Dropdown(['City of Chicago', 'MTL', 'SF'],'City of Chicago', id='dropdown')]),
+    dbc.Row([dcc.Dropdown(['City of Chicago'] + list(df["zip"].unique()),'City of Chicago', id='dropdown')]),
 
     dbc.Row([
         dbc.Col(
@@ -175,12 +171,18 @@ app.layout = html.Div(
         'borderRadius' : '5px',
         'textAlign' : 'left'}
 )
-#@app.callback(
-#    Output('dd-output-container', 'children'),
-#    Input('demo-dropdown', 'value')
-#)
-#def update_table():
-#    pass
+
+@app.callback(
+     [Output("total complaints", 'figure'),
+      Output("top5", 'figure')],
+     Input('dropdown', 'value')
+ )
+def update_table(value):
+    if value != "City of Chicago":
+        return (make_complaint_counts(value), make_top_5(value))
+    else:
+        return (make_complaint_counts(), make_top_5(value))
+    
 
 app.run_server(debug=True, port=8070)
 
