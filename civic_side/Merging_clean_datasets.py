@@ -6,10 +6,10 @@ from .the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
 from .the_polis.voterturnout_cleaning import clean_voter_turnout
 from .the_polis.zillowcleaning import clean_zillow_to_csv
 
-from campaigns.crawler import get_contributions, save_contributions
-from campaigns.cleanup import clean, merge_candidates, process_contributions
-from campaigns.stats import contribution_stats
-from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
+from .campaigns.crawler import get_contributions, save_contributions
+from .campaigns.cleanup import clean, merge_candidates, process_contributions
+from .campaigns.stats import contribution_stats
+from .campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 
 
 # Campaign cleaning functions written by Francesca Vescia

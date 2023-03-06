@@ -11,15 +11,15 @@ vallas_page = "civic_side/campaigns/saved_pages/vallas.html"
 wilson_page = "civic_side/campaigns/saved_pages/wilson.html"
 
 # Destination files for raw scraped data
-chico_raw = "civic_side/campaigns/contributions/chico.json"
-daley_raw = "civic_side/campaigns/contributions/daley.json"
-enyia_raw = "civic_side/campaigns/contributions/enyia.json"
-joyce_raw = "civic_side/campaigns/contributions/joyce.json"
-lightfoot_raw = "civic_side/campaigns/contributions/lightfoot.json"
-mendoza_raw = "civic_side/campaigns/contributions/mendoza.json"
-preckwinkle_raw = "civic_side/campaigns/contributions/preckwinkle.json"
-vallas_raw = "civic_side/campaigns/contributions/vallas.json"
-wilson_raw = "civic_side/campaigns/contributions/wilson.json"
+chico_raw = "/civic_side/campaigns/contributions/chico.json"
+daley_raw = "/civic_side/campaigns/contributions/daley.json"
+enyia_raw = "/civic_side/campaigns/contributions/enyia.json"
+joyce_raw = "/civic_side/campaigns/contributions/joyce.json"
+lightfoot_raw = "/civic_side/campaigns/contributions/lightfoot.json"
+mendoza_raw = "/civic_side/campaigns/contributions/mendoza.json"
+preckwinkle_raw = "/civic_side/campaigns/contributions/preckwinkle.json"
+vallas_raw = "/civic_side/campaigns/contributions/vallas.json"
+wilson_raw = "/civic_side/campaigns/contributions/wilson.json"
 
 PAGES_TO_SCRAPE = [
     (chico_page, chico_raw),
