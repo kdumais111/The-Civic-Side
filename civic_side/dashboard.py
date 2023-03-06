@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 from Merging_clean_datasets import execute_data_merge
 import numpy as np
 
-#execute_data_merge()
+# execute_data_merge()
 
 #Import idea taken from Stephania and Project APWhy
 zip_url = "https://data.cityofchicago.org/api/geospatial/unjd-c2ca?method=export&format=GeoJSON"
@@ -218,25 +218,27 @@ app.layout = html.Div(
     [
     dbc.Row([html.H1("THE CIVIC SIDE")]),
     dbc.Row([html.H3("By Katherine Dumais and Francesca Vescia")]),
-    dbc.Row([html.P([html.Br(),"We began this project to look at civic engagement across Chicago."
-            " We wanted to access whether housing price and income, thereby"
-            " contributing to the government, and campaign finance contributions"
-            " led individuals to engage with city instutions."
-            " We analyzed data from 2019 to look at these relationships during the last"
-            " election cycle. Our results are shown below!",html.Br()])]),
+    dbc.Row([html.P([html.Br(), " The Civic Side dashboard visualizes civic engagement across Chicago,"
+            " specifically how election engagement and civic service utilization,"
+            " measured here by ",
+            html.A("311 calls for non-emergency city services", 
+               href="https://www.chicago.gov/city/en/depts/311.html"),
+            ", vary by zip code and income (as proxied by housing prices)."
+            " We analyzed 2019 data to look at these relationships during the last completed "
+            " mayoral election cycle. Explore our findings below!",html.Br()])]),
     dbc.Row([html.P(        
-        [ "Any Questions? ",
-        html.A("Feel free to drop us a note!", 
+        [ "Questions? Comments? ",
+        html.A("Drop us a note!", 
                href="mailto:kdumais@uchicago.edu,fvescia@uchicago.edu")])]),
-    dbc.Row([html.H3("Compare how residents are engaging with government across zipcodes!")]),
+    dbc.Row([html.H3("Compare how Chicago residents engage with government across zip codes:")]),
     dbc.Row([
         dbc.Col(
             dcc.Graph(id="cloropleth1", figure=make_cloropleth("blues","votingrates"))),
         dbc.Col(
             dcc.Graph(id="cloropleth2", figure=make_cloropleth("greens","avg_donation")))
     ]),
-    dbc.Row([html.H3("Learn more about the individual zipcodes,"
-                      " or the city in aggregate!")]),
+    dbc.Row([html.H3("Learn more about Chicago and its zip codes!")]),
+    dbc.Row([html.P("Tables default to city-wide statistics. Select a zip code from the drop-down to narrow results.")]),
     dbc.Row([html.Br()]),
     dbc.Row([dcc.Dropdown(['City of Chicago'] + list(df["zip"].unique()),'City of Chicago', id='dropdown')]),
 
