@@ -9,6 +9,9 @@ import json
 import plotly.graph_objects as go
 from Merging_clean_datasets import execute_data_merge
 import numpy as np
+import warnings
+warnings.simplefilter("ignore")
+
 
 # execute_data_merge()
 
@@ -106,7 +109,8 @@ def make_top_5(zipcode=None):
     complaints = go.Figure(go.Bar(
                     x=list(data["SR_TYPE"]),
                     y=list(data["complaintcounts"]),
-                    orientation='v'))
+                    orientation='v', 
+                    name="Manually Specified Labels"))
     complaints.update_traces(marker_color="lightblue")
 
     return complaints
@@ -185,7 +189,7 @@ def contributions_table(zipcode = None):
         min_donation =  by_zip["min_donation"][by_zip.zip == zipcode]
         max_donation = by_zip["max_donation"][by_zip.zip == zipcode]
 
-    col_labels = ["Total Donated", "Number of Donations", "Average Donation", 
+    col_labels = ["Total Campaign Contributions", "Number of Donations", "Average Donation", 
                 "Smallest Donation", "Largest Donation"]
         
     contributions = go.Figure(data = [go.Table(
