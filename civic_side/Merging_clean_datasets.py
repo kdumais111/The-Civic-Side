@@ -1,19 +1,15 @@
 import pandas as pd
 import pathlib
 
-from .the_polis._311_Dataset_Cleaning import create_311_clean_csvs
-from .the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
-from .the_polis.voterturnout_cleaning import clean_voter_turnout
-from .the_polis.zillowcleaning import clean_zillow_to_csv
+from the_polis._311_Dataset_Cleaning import create_311_clean_csvs
+from the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
+from the_polis.voterturnout_cleaning import clean_voter_turnout
+from the_polis.zillowcleaning import clean_zillow_to_csv
 
-from .campaigns.crawler import get_contributions, save_contributions
-from .campaigns.cleanup import clean, merge_candidates, process_contributions
-from .campaigns.stats import contribution_stats
-<<<<<<< HEAD
-from .campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
-=======
+from campaigns.crawler import get_contributions, save_contributions
+from campaigns.cleanup import clean, merge_candidates, process_contributions
+from campaigns.stats import contribution_stats
 from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
->>>>>>> 25d9e82c3310b2c9fc570670dbaac629423a41e8
 
 
 # Campaign cleaning functions written by Francesca Vescia
@@ -24,13 +20,12 @@ def execute_data_merge():
     Clean all non-campaign finance data and merge it together.
     '''
     #Create Clean Datasets
-    create_311_clean_csvs()
+    # create_311_clean_csvs()
     build_zip_precinct_csv()
     clean_voter_turnout()
     clean_zillow_to_csv()
     get_campaigns_data()
    
-
     #Combine datasets
     voting_zipcode = voting_to_zipcode()
     zillow= pathlib.Path(__file__
@@ -47,6 +42,7 @@ def execute_data_merge():
     # Make csv
     complete.to_csv("merged.csv", index=False)
     return print("data clean and merge complete")
+
 
 def voting_to_zipcode():
     '''
@@ -85,16 +81,16 @@ def combine_data_zip(df, filename, column):
     merged_set = merged_set.dropna()
     return merged_set
 
+
 def get_campaigns_data():
     clean_files = []
     for page, raw_data in PAGES_TO_SCRAPE:
         contributions = get_contributions(page)
         save_contributions(contributions, raw_data)
         clean(raw_data)
-        clean_files.append(raw_data.split(".")[0] + "_clean.json")
+        clean_files.append(str(raw_data).split(".")[0] + "_clean.json")
     contributions = merge_candidates(clean_files)
     processed_contributions = process_contributions(contributions, START, END)
     contribution_stats(processed_contributions, ZIP_STRS, 
                        "civic_side/campaigns/contributions/contributions_by_zip.json")
     return processed_contributions
-        
