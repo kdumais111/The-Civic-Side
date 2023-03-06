@@ -1,25 +1,44 @@
+import pathlib
 
 # HTML from BOE website
-chico_page = "civic_side/campaigns/saved_pages/chico.html"
-daley_page = "civic_side/campaigns/saved_pages/daley.html"
-enyia_page = "civic_side/campaigns/saved_pages/enyia.html"
-joyce_page = "civic_side/campaigns/saved_pages/joyce.html"
-lightfoot_page = "civic_side/campaigns/saved_pages/lightfoot.html"
-mendoza_page = "civic_side/campaigns/saved_pages/mendoza.html"
-preckwinkle_page = "civic_side/campaigns/saved-pages/preckwinkle.html"
-vallas_page = "civic_side/campaigns/saved_pages/vallas.html"
-wilson_page = "civic_side/campaigns/saved_pages/wilson.html"
+chico_page = pathlib.Path(__file__
+                ).parent / "saved_pages/chico.html"
+daley_page = pathlib.Path(__file__
+                ).parent / "saved_pages/daley.html"
+enyia_page = pathlib.Path(__file__
+                ).parent / "saved_pages/enyia.html"
+joyce_page = pathlib.Path(__file__
+                ).parent / "saved_pages/joyce.html"
+lightfoot_page = pathlib.Path(__file__
+                ).parent / "saved_pages/lightfoot.html"
+mendoza_page = pathlib.Path(__file__
+                ).parent / "saved_pages/mendoza.html"
+preckwinkle_page = pathlib.Path(__file__
+                ).parent / "saved_pages/preckwinkle.html"
+vallas_page = pathlib.Path(__file__
+                ).parent / "saved_pages/vallas.html"
+wilson_page = pathlib.Path(__file__
+                ).parent / "saved_pages/wilson.html"
 
 # Destination files for raw scraped data
-chico_raw = "/civic_side/campaigns/contributions/chico.json"
-daley_raw = "/civic_side/campaigns/contributions/daley.json"
-enyia_raw = "/civic_side/campaigns/contributions/enyia.json"
-joyce_raw = "/civic_side/campaigns/contributions/joyce.json"
-lightfoot_raw = "/civic_side/campaigns/contributions/lightfoot.json"
-mendoza_raw = "/civic_side/campaigns/contributions/mendoza.json"
-preckwinkle_raw = "/civic_side/campaigns/contributions/preckwinkle.json"
-vallas_raw = "/civic_side/campaigns/contributions/vallas.json"
-wilson_raw = "/civic_side/campaigns/contributions/wilson.json"
+chico_raw = pathlib.Path(__file__
+                ).parent / "contributions/chico.json"
+daley_raw = pathlib.Path(__file__
+                ).parent / "contributions/daley.json"
+enyia_raw = pathlib.Path(__file__
+                ).parent / "contributions/enyia.json"
+joyce_raw = pathlib.Path(__file__
+                ).parent / "contributions/joyce.json"
+lightfoot_raw = pathlib.Path(__file__
+                ).parent / "contributions/lightfoot.json"
+mendoza_raw = pathlib.Path(__file__
+                ).parent / "contributions/mendoza.json"
+preckwinkle_raw = pathlib.Path(__file__
+                ).parent / "contributions/preckwinkle.json"
+vallas_raw = pathlib.Path(__file__
+                ).parent / "contributions/vallas.json"
+wilson_raw = pathlib.Path(__file__
+                ).parent / "contributions/wilson.json"
 
 PAGES_TO_SCRAPE = [
     (chico_page, chico_raw),
