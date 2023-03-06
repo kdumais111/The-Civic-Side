@@ -17,10 +17,11 @@ from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 
 def execute_data_merge():
     '''
-    Clean all non-campaign finance data and merge it together.
+    Clean all non-campaign finance datasets, scrape campaign API,
+    and merge them together. Returns merged dataset.
     '''
     #Create Clean Datasets
-    # create_311_clean_csvs()
+    create_311_clean_csvs()
     build_zip_precinct_csv()
     clean_voter_turnout()
     clean_zillow_to_csv()
@@ -37,10 +38,10 @@ def execute_data_merge():
     campaign = pathlib.Path(__file__
                 ).parent /"campaigns/contributions/stats_by_zip.json"
     add_campaign = combine_data_zip(add_complaints, campaign, "zip")
-    complete = add_campaign.drop(add_complaints.columns[3], axis=1)
+    #complete = add_campaign.drop(add_complaints.columns[3], axis=1)
 
     # Make csv
-    complete.to_csv("civic_side/merged.csv", index=False)
+    add_campaign.to_csv("civic_side/merged.csv", index=False)
     return print("data clean and merge complete")
 
 
@@ -58,7 +59,7 @@ def voting_to_zipcode():
     voting_district = pd.merge(districts_df, voting_df, 
                     on=["ward","precinct"], how='inner')
     voting_combined = voting_district.groupby(["zip"]).sum().reset_index()
-    voting_combined["votingrates"]= voting_district["Ballots Cast"]\
+    voting_combined["votingrates"]= voting_district["Ballots Cast"]*100\
                                     / voting_district["Register Voters"]
     voting_combined = voting_combined[['zip', "votingrates"]]
     return voting_combined

@@ -1,5 +1,6 @@
 import pandas as pd
 import pathlib
+import numpy as np
 
 #Code Written By Katherine Dumais
 
@@ -73,11 +74,10 @@ def complaints_csv(zip, pop):
     '''
 
     zip = zip[zip['zipcode'].isin (pop['zipcode'])]
-    zip = zip.merge(pop, how = 'left', on = 'zipcode')
+    zip = zip.merge(pop, how ='left', on='zipcode')
     zip['per1000_complaint'] = (zip['complaintcounts'] /
                                 zip["Population - Total"] * 1000)
-    
-    zip.to_csv(pathlib.Path(__file__).parent /'_311_complaint_count.csv',
+    zip.to_csv(pathlib.Path(__file__).parent /'311_complaint_count.csv',
                 index= False)
     return print('311 data csv created')
 
@@ -92,7 +92,7 @@ def find_top_five(df, pop):
     comp_by_zip = []
     for _ , zipcodegroup in df[["SR_TYPE","ZIP_CODE"]].groupby("ZIP_CODE"):
         comp_by_zip.append(zipcodegroup.value_counts(
-        sort = True, dropna = True).to_frame('complaintcounts').iloc[0:5])
+        sort=True, dropna=True).to_frame('complaintcounts').iloc[0:5])
     complaints = pd.concat(comp_by_zip) 
     complaints.to_csv(pathlib.Path(__file__).parent /'311_topcomplaints_byzip.csv'\
                       , header = True)

@@ -8,8 +8,9 @@ from urllib.request import urlopen
 import json
 import plotly.graph_objects as go
 from Merging_clean_datasets import execute_data_merge
+import numpy as np
 
-execute_data_merge()
+#execute_data_merge()
 
 #Import idea taken from Stephania and Project APWhy
 zip_url = "https://data.cityofchicago.org/api/geospatial/unjd-c2ca?method=export&format=GeoJSON"
@@ -18,7 +19,14 @@ with urlopen(zip_url) as response:
 
 app = Dash(external_stylesheets=[dbc.themes.YETI])
 
+#merged dataframe
 df = pd.read_csv(pathlib.Path(__file__).parent /"merged.csv")
+df = df.round(decimals=2)
+
+#dataframe excluding 60612
+df_revised = pd.read_csv(pathlib.Path(__file__).parent /"merged.csv")
+df_revised["per1000_complaint"][df_revised["zip"] == 60612] = 0
+df_revised = df_revised.round(decimals=2)
 
 def make_cloropleth(color, default):
     '''
@@ -37,11 +45,11 @@ def make_cloropleth(color, default):
         button1 =  dict(method = "restyle",
                     args = [{'z': [ df["votingrates"] ], }],
                     label = "Voting Rates (Percentages)")
-        button5 = dict(method = "restyle",
+        button2 = dict(method = "restyle",
                     args = [{'z': [ df["avg_donation"] ]}],
                     label = "Average Donations")
     else:
-        button5 =  dict(method = "restyle",
+        button2 =  dict(method = "restyle",
                     args = [{'z': [ df["votingrates"]],
                              'tickformat': ',.0%' }],
                     label = "Voting Rates (Percentages)")
@@ -50,16 +58,22 @@ def make_cloropleth(color, default):
                              'text' : "hello"}],
                     label = "Average Donations")
 
-    button2 =  dict(method = "restyle",
-                    args = [{'z': [ df["per1000_compaint"] ]}],
-                    label = "3-1-1 Complaints")
     button3 =  dict(method = "restyle",
+                    args = [{'z': [ df["per1000_complaint"] ]}],
+                    label = "311 Complaints per thousand residents")
+    button4 = dict(method = "restyle",
+                    args = [{'z': [ df_revised["per1000_complaint"] ]}],
+                    label = "311 Complaints excluding 60612")
+
+    button5 =  dict(method = "restyle",
                     args = [{'z': [ df["2019avprice"] ]}],
                     label = "Average Housing Prices")
     
-    button4 = dict(method = "restyle",
+    button6 = dict(method = "restyle",
                     args = [{'z': [ df["num_donations"] ]}],
                     label = "Number of Donations")
+
+
     
     fig.update_traces(hovertemplate='<br>Zip=%{customdata[0]}<br>Count=%{z}')
 
@@ -71,7 +85,9 @@ def make_cloropleth(color, default):
                                         xanchor='right',
                                         yanchor='top',
                                         active=0,
-                                        buttons=[button1, button2, button3, button4, button5],
+                                        buttons=[button1, button2,
+                                                 button3, button4, 
+                                                 button5, button6],
                                         )
                                 ])
     return fig
@@ -80,30 +96,36 @@ def make_top_5(zipcode=None):
     '''
     Creates a table with the top 5 complaints per zipcode
     '''
-    top5=pd.read_csv( pathlib.Path(__file__).parent /"the_polis/311_topcomplaints_byzip.csv")
+    top5=pd.read_csv( pathlib.Path(__file__).parent\
+                      /"the_polis/311_topcomplaints_byzip.csv")
     if zipcode == None:
-        data = top5.groupby("SR_TYPE").sum().sort_values(by='complaintcounts', ascending=False).iloc[0:5,0].to_frame().reset_index()
-        data = data["SR_TYPE"]
+        data = top5.groupby("SR_TYPE").sum().sort_values(
+            by='complaintcounts', ascending=False).iloc[0:5].reset_index()
     else:
-        data = top5["SR_TYPE"][top5["ZIP_CODE"] == zipcode]
-    complaints = go.Figure(data=[go.Table(
-        header=dict(values=["Top 5 311 Complaints"],
-                    line_color='white',
-                    fill_color='lightblue',
-                    align=['left','center'],
-                    font=dict(color='black', size=16),
-                    ),
-        cells=dict(values=[data],
-                fill_color='white',
-                font = dict(color ='black', size = 14),
-                align='center',
-                ))
-    ])
+        data = top5[top5["ZIP_CODE"] == zipcode]
+    complaints = go.Figure(go.Bar(
+                    x=list(data["SR_TYPE"]),
+                    y=list(data["complaintcounts"]),
+                    orientation='v'))
+    complaints.update_traces(marker_color="lightblue")
+        #data=[go.bar(
+        # header=dict(values=["Top 5 311 Complaints"],
+        #             line_color='white',
+        #             fill_color='lightblue',
+        #             align=['left','center'],
+        #             font=dict(color='black', size=16),
+        #            ),
+        # cells=dict(values=[data],
+        #         fill_color='white',
+        #         font = dict(color ='black', size = 14),
+        #         align='center',
+        #         ))
+    #])
     return complaints
 
 def make_complaint_counts(zipcode=None):
     '''
-    Build a table of total complaint counts per zip
+    Build a table of total complaint counts per zip.
     '''
     if zipcode == None:
         data = df.complaintcounts.sum()
@@ -126,11 +148,41 @@ def make_complaint_counts(zipcode=None):
     complaints_count.update_layout(height=int(400))
     return complaints_count
 
+def make_wards_precincts(zipcode=None):
+    '''
+    Give a list of wards per zipcode
+    '''
+    wards = pd.read_csv(pathlib.Path(__file__).parent\
+                         /"the_polis/clean_zipcode_precinct.csv")
+    data = wards.sort_values(by=["ward","precinct"])
+    if zipcode == None:
+        data = data[["ward","precinct"]].drop_duplicates()
+    else:    
+        data = data[["ward","precinct"]][data["zip"] == zipcode]
+    
+    wards = go.Figure(data=[go.Table(
+    header=dict(values=["Wards", "Precincts"],
+                line_color='white',
+                fill_color='lightgrey',
+                align=['left','center'],
+                font=dict(color='black', size=16),
+                ),
+    cells=dict(values=[data["ward"],data["precinct"]],
+            font = dict(color ='black', size = 13),
+            fill_color='white',
+            align='center'
+            )),
+    ])
+    wards.update_layout(height=int(400))
+    return wards
+
+
 def contributions_table(zipcode = None):
     '''
     Creates a table with campaign contributions data 
     '''
-    by_zip = pd.read_json(pathlib.Path(__file__).parent /"campaigns/contributions/contributions_by_zip.json")
+    by_zip = pd.read_json(pathlib.Path(__file__).parent\
+                           /"campaigns/contributions/contributions_by_zip.json")
 
     if zipcode == None:
         total_donated = round(by_zip["total_donated"].sum(), 2)
@@ -151,11 +203,12 @@ def contributions_table(zipcode = None):
     contributions = go.Figure(data = [go.Table(
         header = dict(values = col_labels,
                     line_color = 'white',
-                    fill_color = 'lightblue',
-                    align = ['left','center'],
+                    fill_color = 'darkseagreen',
+                    align = ['center','center'],
                     font = dict(color ='black', size = 16),
                     ),
-        cells = dict(values = [[total_donated], [num_donations], [avg_donation], [min_donation], [max_donation]],
+        cells = dict(values = [[total_donated], [num_donations], [avg_donation],
+                                [min_donation], [max_donation]],
                 fill_color = 'white',
                 align = 'center')) 
         ])
@@ -187,11 +240,13 @@ app.layout = html.Div(
     dbc.Row([html.Br()]),
     dbc.Row([dcc.Dropdown(['City of Chicago'] + list(df["zip"].unique()),'City of Chicago', id='dropdown')]),
 
+    dbc.Row(
+            dcc.Graph(id="total complaints", figure=make_complaint_counts(zipcode=None))),
     dbc.Row([
         dbc.Col(
             dcc.Graph(id="top5", figure=make_top_5(zipcode=None))),
         dbc.Col(
-            dcc.Graph(id="total complaints", figure=make_complaint_counts(zipcode=None))),
+            dcc.Graph(id="wards", figure=make_wards_precincts(zipcode=None) )),
     ]),
     dbc.Row(
             dcc.Graph(id="campaigns", figure=contributions_table(zipcode = None))),
@@ -208,14 +263,17 @@ app.layout = html.Div(
 @app.callback(
      [Output("total complaints", 'figure'),
       Output("top5", 'figure'),
-      Output("campaigns", 'figure')],
+      Output("campaigns", 'figure'),
+      Output("wards", 'figure')],
      Input('dropdown', 'value')
  )
 def update_table(value):
     if value != "City of Chicago":
-        return (make_complaint_counts(value), make_top_5(value),contributions_table(value))
+        return (make_complaint_counts(value), make_top_5(value),
+                contributions_table(value), make_wards_precincts(value))
     else:
-        return (make_complaint_counts(), make_top_5(), contributions_table())
+        return (make_complaint_counts(), make_top_5(), 
+                contributions_table(), make_wards_precincts())
     
 
 app.run_server(debug=True, port=8070)
