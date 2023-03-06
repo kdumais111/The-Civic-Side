@@ -1,4 +1,4 @@
-from data_prep_funcs.py import prep_all_data
+from data_prep_funcs import prep_all_data
 import warnings
 
 warnings.simplefilter("ignore")
