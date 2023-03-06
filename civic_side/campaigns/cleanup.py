@@ -56,8 +56,8 @@ def merge_candidates(candidates):
 def process_contributions(df, period_start, period_end):
     """
     Takes a Pandas dataframe of clean campaign contributions data (df),
-    loads it into a Pandas data frame, converts dates from strings,
-    and drops contributions received outside the specified period.
+    converts dates from strings, and drops contributions received outside 
+    the specified period.
 
     Inputs:
         json_file: clean candidate contributions data
