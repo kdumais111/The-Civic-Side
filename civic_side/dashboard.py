@@ -80,7 +80,7 @@ def make_top_5(zipcode=None):
     '''
     Creates a table with the top 5 complaints per zipcode
     '''
-    top5=pd.read_csv( pathlib.Path(__file__).parent /"311_topcomplaints_byzip.csv")
+    top5=pd.read_csv( pathlib.Path(__file__).parent /"the_polis/311_topcomplaints_byzip.csv")
     if zipcode == None:
         data = top5.groupby("SR_TYPE").sum().sort_values(by='complaintcounts', ascending=False).iloc[0:5,0].to_frame().reset_index()
         data = data["SR_TYPE"]
