@@ -1,2 +1,10 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=9909958&assignment_repo_type=AssignmentRepo)
-`
+
+## The Civic Side
+
+To launch our dashboard:
+
+• Download the [Civic Side GitHub repository] (https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side)
+• Run `poetry install` in the top-level directory, `30122-project-the-civic-side`
+• Run `poetry run python civic_side/dashboard.py` in the top-level directory, `30122-project-the-civic-side`
+• Follow the Dash link (`Dash is running on < link >`)
+• Explore the Civic Side!
