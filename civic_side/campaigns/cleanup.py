@@ -10,7 +10,8 @@ def clean(json_file):
     and saves it to a new JSON file. (The new file name is the file name from json_file
     with "_clean" added as a suffix.)
     """
-    clean_file = json_file.split(".")[0] + "_clean.json"
+    str_file = str(json_file)
+    clean_file = str_file.split(".")[0] + "_clean.json"
 
     with open(json_file) as jf:
         contributions = json.load(jf)
