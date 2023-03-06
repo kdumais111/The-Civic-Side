@@ -108,19 +108,7 @@ def make_top_5(zipcode=None):
                     y=list(data["complaintcounts"]),
                     orientation='v'))
     complaints.update_traces(marker_color="lightblue")
-        #data=[go.bar(
-        # header=dict(values=["Top 5 311 Complaints"],
-        #             line_color='white',
-        #             fill_color='lightblue',
-        #             align=['left','center'],
-        #             font=dict(color='black', size=16),
-        #            ),
-        # cells=dict(values=[data],
-        #         fill_color='white',
-        #         font = dict(color ='black', size = 14),
-        #         align='center',
-        #         ))
-    #])
+
     return complaints
 
 def make_complaint_counts(zipcode=None):
@@ -232,11 +220,12 @@ app.layout = html.Div(
                href="mailto:kdumais@uchicago.edu,fvescia@uchicago.edu")])]),
     dbc.Row([html.H3("Compare how Chicago residents engage with government across zip codes:")]),
     dbc.Row([
-        dbc.Col(
-            dcc.Graph(id="cloropleth1", figure=make_cloropleth("blues","votingrates"))),
+        dbc.Col([
+            dcc.Graph(id="cloropleth1", figure=make_cloropleth("blues","votingrates")),
+            html.H6("Note: 60612 contains the largest conglomeration of hospitals downtown", style={'textAlign': ['top', 'center'], 'margin-left' : '150px', 'margin-top': '0px', 'font-size': "8"})]),
         dbc.Col(
             dcc.Graph(id="cloropleth2", figure=make_cloropleth("greens","avg_donation")))
-    ]),
+            ]),
     dbc.Row([html.H3("Learn more about Chicago and its zip codes!")]),
     dbc.Row([html.P("Tables default to city-wide statistics. Select a zip code from the drop-down to narrow results.")]),
     dbc.Row([html.Br()]),
