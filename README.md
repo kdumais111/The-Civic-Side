@@ -13,6 +13,6 @@ To access the dashboard:
 
 • Run `poetry run pythong_civic_side/prep_data.py` to scrape, clean, and merge the dashboard data
 
-• Run `poetry run python civic_side/dashboard.py` to active the dashboard and follow the resulting `Dash is running on` link from the terminal to the browser-based dashboard
+• Run `poetry run python civic_side/dashboard.py` to active the dashboard and follow the resulting link from the terminal to the browser-based dashboard
 
 • Explore the Civic Side!
