@@ -6,9 +6,9 @@ from .the_polis.cleanzipcodes_toprecincts import build_zip_precinct_csv
 from .the_polis.voterturnout_cleaning import clean_voter_turnout
 from .the_polis.zillowcleaning import clean_zillow_to_csv
 
-from campaigns.crawler import get_contributions, save_contributions
-from campaigns.cleanup import clean, merge_candidates, process_contributions
-from campaigns.stats import contribution_stats
+from .campaigns.crawler import get_contributions, save_contributions
+from .campaigns.cleanup import clean, merge_candidates, process_contributions
+from .campaigns.stats import contribution_stats
 from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 
 
@@ -30,13 +30,13 @@ def execute_data_merge():
     #Combine datasets
     voting_zipcode = voting_to_zipcode()
     zillow= pathlib.Path(__file__
-                ).parent /"zillow_cleaned_complete.csv"
+                ).parent /"the_polis/zillow_cleaned_complete.csv"
     voting_housing = combine_data_zip(voting_zipcode, zillow, "Zipcode")
     complaints= pathlib.Path(__file__
-                ).parent /"311_complaint_count.csv"
+                ).parent /"the_polis/311_complaint_count.csv"
     add_complaints = combine_data_zip(voting_housing, complaints, "zipcode")
     campaign = pathlib.Path(__file__
-                ).resolve().parents[1] /"campaigns/contributions/stats_by_zip.json"
+                ).parent /"campaigns/contributions/stats_by_zip.json"
     add_campaign = combine_data_zip(add_complaints, campaign, "zip")
     complete = add_campaign.drop(add_complaints.columns[3], axis=1)
 
@@ -50,8 +50,8 @@ def voting_to_zipcode():
     Combine datasets by zipcode.
     '''
     districts = pathlib.Path(__file__
-                        ).parent /"clean_zipcode_precinct.csv"
-    voters = pathlib.Path(__file__).parent /"voterturnout.csv"
+                        ).parent /"the_polis/clean_zipcode_precinct.csv"
+    voters = pathlib.Path(__file__).parent /"the_polis/voterturnout.csv"
     voting_df = pd.read_csv(voters)
     districts_df = pd.read_csv(districts)
     voting_df["precinct"] = voting_df["precinct"].astype(int)
@@ -92,4 +92,5 @@ def get_campaigns_data():
     processed_contributions = process_contributions(contributions, START, END)
     contribution_stats(processed_contributions, ZIP_STRS, 
                        "civic_side/campaigns/contributions/contributions_by_zip.json")
+    return processed_contributions
         
