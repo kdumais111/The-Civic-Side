@@ -13,8 +13,6 @@ import warnings
 warnings.simplefilter("ignore")
 
 
-# execute_data_merge()
-
 #Import idea taken from Stephania and Project APWhy
 zip_url = "https://data.cityofchicago.org/api/geospatial/unjd-c2ca?method=export&format=GeoJSON"
 with urlopen(zip_url) as response:
@@ -112,6 +110,7 @@ def make_top_5(zipcode=None):
                     orientation='v', 
                     name="Manually Specified Labels"))
     complaints.update_traces(marker_color="lightblue")
+    complaints.update_layout(title="Top Five 311 Complaints")
 
     return complaints
 
@@ -137,7 +136,7 @@ def make_complaint_counts(zipcode=None):
             align='center'
             )),
     ])
-    complaints_count.update_layout(height=int(400))
+    complaints_count.update_layout(height=int(250))
     return complaints_count
 
 def make_wards_precincts(zipcode=None):
@@ -165,7 +164,7 @@ def make_wards_precincts(zipcode=None):
             align='center'
             )),
     ])
-    wards.update_layout(height=int(400))
+    wards.update_layout(height=int(400), title="What are the Voting Districts represented?")
     return wards
 
 
@@ -189,7 +188,7 @@ def contributions_table(zipcode = None):
         min_donation =  by_zip["min_donation"][by_zip.zip == zipcode]
         max_donation = by_zip["max_donation"][by_zip.zip == zipcode]
 
-    col_labels = ["Total Campaign Contributions", "Number of Donations", "Average Donation", 
+    col_labels = ["Total Donated", "Number of Donations", "Average Donation", 
                 "Smallest Donation", "Largest Donation"]
         
     contributions = go.Figure(data = [go.Table(
@@ -204,7 +203,10 @@ def contributions_table(zipcode = None):
                 fill_color = 'white',
                 align = 'center')) 
         ])
+    contributions.update_layout(height=int(400), title="2019 Mayoral Campaign Contributions")
     return contributions
+
+#App Layout
 
 app.layout = html.Div(
     [
@@ -273,6 +275,8 @@ def update_table(value):
 
 app.run_server(debug=True, port=8070)
 
+
+#Resources Used: 
 # https://plotly.com/python/choropleth-maps/#using-geopandas-data-frames
 # https://plotly.com/python/mapbox-county-choropleth/
 # https://community.plotly.com/t/creating-a-dropdown-slider-for-a-choropleth-map-with-plotly-express/49370
