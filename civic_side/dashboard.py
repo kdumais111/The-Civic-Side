@@ -222,7 +222,7 @@ app.layout = html.Div(
     dbc.Row([
         dbc.Col([
             dcc.Graph(id="cloropleth1", figure=make_cloropleth("blues","votingrates")),
-            html.H6("Note: 60612 contains the largest conglomeration of hospitals downtown", style={'textAlign': ['top', 'center'], 'margin-left' : '150px', 'margin-top': '0px', 'font-size': "8"})]),
+            html.H6("Note: 60612 contains the largest conglomeration of hospitals downtown", style={'textAlign': ['top', 'center'], 'margin-left' : '150px', 'margin-top': '0px', 'font-size': "8"}),html.Br(),html.Br()]),
         dbc.Col(
             dcc.Graph(id="cloropleth2", figure=make_cloropleth("greens","avg_donation")))
             ]),
