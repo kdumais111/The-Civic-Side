@@ -15,7 +15,7 @@ from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 # Campaign cleaning functions written by Francesca Vescia
 # Merging structure and csv cleaning functions written by Katherine Dumais
 
-def execute_data_merge():
+def prep_all_data():
     '''
     Clean all non-campaign finance datasets, scrape campaign API,
     and merge them together. Returns merged dataset.
