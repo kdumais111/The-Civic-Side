@@ -40,7 +40,7 @@ def execute_data_merge():
     complete = add_campaign.drop(add_complaints.columns[3], axis=1)
 
     # Make csv
-    complete.to_csv("merged.csv", index=False)
+    complete.to_csv("civic_side/merged.csv", index=False)
     return print("data clean and merge complete")
 
 
