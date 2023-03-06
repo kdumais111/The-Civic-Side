@@ -4,17 +4,12 @@ import plotly.express as px
 import pandas as pd
 import geopandas as gpd
 import pathlib
-# Libraries above this line are in our poetry folder; libraries below it
-# are throwing `Could not find a matching version of package < package name >`
-# when FV run's `poetry add < package name >`
 from urllib.request import urlopen
 import json
 import plotly.graph_objects as go
+from Merging_clean_datasets import execute_data_merge
 
-# We need to make sure all libraries above are in Poetry plus jupiter notebooks
-
-# Figures are represented as trees with named nodes called "attributes". 
-# The root node of the tree has three top-level attributes: data, layout and frames.
+execute_data_merge()
 
 #Import idea taken from Stephania and Project APWhy
 zip_url = "https://data.cityofchicago.org/api/geospatial/unjd-c2ca?method=export&format=GeoJSON"
@@ -24,11 +19,6 @@ with urlopen(zip_url) as response:
 app = Dash(external_stylesheets=[dbc.themes.YETI])
 
 df = pd.read_csv(pathlib.Path(__file__).parent /"merged.csv")
-
-# fig = px.choropleth(df, geojson=shape_file, locations="zip", 
-#                     featureidkey="properties.zip", 
-#                     color="votingrates", 
-#                     projection="mercator")
 
 def make_cloropleth(color, default):
     '''
