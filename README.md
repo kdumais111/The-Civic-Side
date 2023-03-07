@@ -23,4 +23,6 @@ The Civic Side dashboard explores several measures of civic engagement across Ch
 
 **Below the maps, several tables display additional details about 311 utilization and campaign contributions in Chicago.** The tables default to city-wide data, but you can use the drop-down to display numbers for a zip code of interest instead. For example, select 60612 to see that the vast majority of 311 calls in the medical district are information only calls, likely from community members seeking information about accessing medical services.
 
+**For those curious about hyperlocal politics, a final table maps wards and precincts to Chicago zip codes.**
+
 ### Enjoy exploring the Civic Side!
