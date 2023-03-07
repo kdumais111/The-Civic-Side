@@ -1,6 +1,7 @@
 import geopandas
 import pathlib
 
+#Create Zipcode to Ward and Precinct
 #Written By Katherine Dumais
 
 def build_zip_precinct_csv():
@@ -31,7 +32,7 @@ def Map_Zip_to_Precinct(filename, zipfile):
                                             "ebe6-474b-a4a4-174998ba8dba.shp"
     zips= geopandas.read_file(zipfile)
     overlap= geopandas.sjoin(precincts, zips)
-    trimmed_overlap = overlap[["ward","precinct","zip"]]
+    trimmed_overlap = overlap[["ward", "precinct", "zip"]]
     return trimmed_overlap.to_csv(pathlib.Path(__file__
                                                ).parent /"clean_zipcode_precinct.csv",
                                                 index=False)

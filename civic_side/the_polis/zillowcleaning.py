@@ -1,6 +1,8 @@
-import pandas as pd
 import pathlib
+import pandas as pd
 
+
+# Clean Zillow Data into 2019 Average Prices CSV
 #Written by Katherine Dumais
 
 def clean_zillow_to_csv():
@@ -18,7 +20,7 @@ def clean_zillow_to_csv():
 
 def clean_zillow_data():
     '''
-    Load zillow housingdata as a pandas database. 
+    Load zillow housingdata as a pandas database.
     Segment to just 2019 data and to the City of Chicago
     Returns database of this data
     '''
@@ -36,7 +38,7 @@ def clean_zillow_data():
     fields.Zipcode = fields.Zipcode.astype("string")
     fields.Zipcode = fields.Zipcode.str.replace(r"d{4}", r"0$&")
     fields.City = fields.City.str.lower()
-    return fields 
+    return fields
 
 
 def map_city_data(df):
@@ -70,13 +72,13 @@ def housingprice_mean_2019(df):
     '''
     Take all 2019 median housing prices and average them, to avoid 
     impact of outliers.
-    Returns dataframe of just zipcodes and average housing prices. 
+    Returns dataframe of just zipcodes and average housing prices.
     '''
     df["2019avprice"] = df.loc[:,["1/31/19", "2/28/19", "3/31/19",
                                         "4/30/19", "5/31/19", "6/30/19", 
                                         "7/31/19","8/31/19", "9/30/19",
                                         "10/31/19", "11/30/19", "12/31/19"]
-                                        ].agg("mean",axis=1)
+                                        ].agg("mean", axis=1)
     complete_data = df[["Zipcode","2019avprice"]]
     return complete_data
 

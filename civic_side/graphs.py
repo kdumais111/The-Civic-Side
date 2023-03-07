@@ -23,6 +23,7 @@ def make_cloropleth(df, df_revised, zipcodes, color, default):
 
     Returns figure
     '''
+    # Resources at the bottom of the document used to create this code.
     fig = px.choropleth_mapbox(df, geojson=zipcodes, locations="zip",
                                featureidkey="properties.zip", color=default,
                                mapbox_style="carto-positron", custom_data=["zip"],
@@ -33,33 +34,33 @@ def make_cloropleth(df, df_revised, zipcodes, color, default):
     fig.update_geos(fitbounds="locations", visible=False)
     if default == "votingrates":
         button1 =  dict(method = "restyle",
-                    args = [{'z': [ df["votingrates"] ], }],
+                    args = [{'z': [df["votingrates"]], }],
                     label = "Voting Rates (Percentages)")
         button2 = dict(method = "restyle",
-                    args = [{'z': [ df["avg_donation"] ]}],
+                    args = [{'z': [df["avg_donation"]]}],
                     label = "Average Donations")
     else:
         button2 =  dict(method = "restyle",
-                    args = [{'z': [ df["votingrates"]],
+                    args = [{'z': [df["votingrates"]],
                              'tickformat': ',.0%' }],
                     label = "Voting Rates (Percentages)")
         button1 = dict(method = "restyle",
-                    args = [{'z': [ df["avg_donation"] ]}],
+                    args = [{'z': [df["avg_donation"]]}],
                     label = "Average Donations")
 
     button3 =  dict(method = "restyle",
-                    args = [{'z': [ df["per1000_complaint"] ]}],
+                    args = [{'z': [df["per1000_complaint"]]}],
                     label = "311 Complaints per thousand residents")
     button4 = dict(method = "restyle",
-                    args = [{'z': [ df_revised["per1000_complaint"] ]}],
+                    args = [{'z': [df_revised["per1000_complaint"]]}],
                     label = "311 Complaints excluding 60612")
 
     button5 =  dict(method = "restyle",
-                    args = [{'z': [ df["2019avprice"] ]}],
+                    args = [{'z': [df["2019avprice"]]}],
                     label = "Average Housing Prices")
 
     button6 = dict(method = "restyle",
-                    args = [{'z': [ df["num_donations"] ]}],
+                    args = [{'z': [df["num_donations"]]}],
                     label = "Number of Donations")
 
     fig.update_traces(hovertemplate = '<br>Zip=%{customdata[0]}<br>Count=%{z}')
@@ -85,7 +86,7 @@ def make_top_5(zipcode=None):
     Zipcode- String of Chicago Zipcode
     Returns Figure
     '''
-    top5 = pd.read_csv( pathlib.Path(__file__).parent\
+    top5 = pd.read_csv(pathlib.Path(__file__).parent\
                       /"the_polis/311_topcomplaints_byzip.csv")
     if zipcode is None:
         data = top5.groupby("SR_TYPE").sum().sort_values(
@@ -112,17 +113,20 @@ def make_complaint_counts(df, zipcode=None):
     Returns: chart with complaint counts by zipcode and
     in aggregate
     '''
+    #Link Below Used to Help Write this Code.
+    #https://plotly.com/python/choropleth-maps/#using-geopandas-data-frames
+
     if zipcode is None:
         data = df.complaintcounts.sum()
     else:
         data = df.complaintcounts[df.zip == zipcode]
 
     complaints_count = go.Figure(data = [go.Table(
-    header=dict(values=["2019 311 Calls"],
+    header=dict(values = ["2019 311 Calls"],
                 line_color = 'white',
                 fill_color = 'lightblue',
                 align = ['left','center'],
-                font=dict(color = 'black', size = 16),
+                font = dict(color = 'black', size = 16),
                 ),
     cells=dict(values=[data],
             font = dict(color ='black', size = 16),
@@ -147,13 +151,13 @@ def make_wards_precincts(zipcode=None):
         data = data[["ward","precinct"]][data["zip"] == zipcode]
 
     wards = go.Figure(data=[go.Table(
-    header = dict(values=["Wards", "Precincts"],
-                line_color='white',
-                fill_color='lightgrey',
-                align=['left','center'],
-                font=dict(color='black', size=16),
+    header = dict(values = ["Wards", "Precincts"],
+                line_color = 'white',
+                fill_color = 'lightgrey',
+                align = ['left','center'],
+                font = dict(color = 'black', size = 16),
                 ),
-    cells = dict(values=[data["ward"],data["precinct"]],
+    cells = dict(values = [data["ward"], data["precinct"]],
             font = dict(color ='black', size = 13),
             fill_color = 'white',
             align = 'center'
@@ -202,3 +206,11 @@ def contributions_table(zipcode = None):
     contributions.update_layout(height=int(400),
                                 title="2019 Mayoral Campaign Contributions")
     return contributions
+
+
+#Resources Used:
+# https://plotly.com/python/choropleth-maps/#using-geopandas-data-frames
+# https://plotly.com/python/mapbox-county-choropleth/
+# https://community.plotly.com/t/creating-a-dropdown-slider-for-a-choropleth-map-with-plotly-express/49370
+# https://plotly.com/python/hover-text-and-formatting/
+# https://plotly.com/python/choropleth-maps/#using-geopandas-data-frames
