@@ -41,15 +41,18 @@ app.layout = html.Div(
     dbc.Row([html.P([html.Br(),
             " The Civic Side dashboard visualizes civic engagement across Chicago,"
             " specifically how election engagement and civic service utilization,"
-            " measured here by ",
-            html.A("311 calls for non-emergency city services",
-               href="https://www.chicago.gov/city/en/depts/311.html"),
+            " measured here by "
+            "311 calls for non-emergency city services"
             ", vary by zip code and income (as proxied by housing prices)."
             " We analyzed 2019 data to look at these relationships"
             " during the last completed"
-            " mayoral election cycle." 
-            " Read more about our data and methods and access detailed instructions"
-            " for interacting with the dashboard in our GitHub respository,"
+            " mayoral election cycle.  ", 
+            html.A("Read more about our data and methods",
+                   href="https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side/blob/main/README.md"),
+            " and access",
+            html.A(" detailed intstructions for interacting with the dashboard",
+                   href="https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side/blob/main/README.md"),            
+            " in the Civic Side GitHub respository,"
             " or dive straight in and explore our findings below!",html.Br()])]),
     dbc.Row([html.P(
         [ "Questions? Comments? ",
