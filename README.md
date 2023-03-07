@@ -5,20 +5,22 @@ The Civic Side dashboard explores several measures of civic engagement across Ch
 
 ### To launch the dashboard:
 
-• Download the [Civic Side GitHub repository](https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side)
+1. Download the [Civic Side GitHub repository](https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side)
 
-• Navigate to the top-level directory, `30122-project-the-civic-side`
+2. Navigate to the top-level directory, `30122-project-the-civic-side`
 
-• Run `poetry install` from the command line to active the virtual environment
+3. Run `poetry install` from the command line to active the virtual environment
 
-• Run `poetry run python3 civic_side/prep_data.py` to scrape, clean, and merge the dashboard data
+4. Run `poetry run python3 civic_side/prep_data.py` to scrape, clean, and merge the dashboard data
 
-• Run `poetry run python3 civic_side/dashboard.py` to active the dashboard and follow the resulting link from the terminal to the browser-based dashboard
+5. Run `poetry run python3 civic_side/dashboard.py` to active the dashboard and follow the resulting link from the terminal to the browser-based dashboard
 
-### To interact with the dashhboard:
+### To interact with the dashboard:
 
-• Pick your metrics of choice from the map drop-down menus – compare the maps side-by-side to see which metrics do (and don't) correlate with each other
+**Two side-by-side maps of Chicago are your gateway to the Civic Side. Use the map drop-downs to specify which measure of civic engagement (voting rates, average campaign contributions, 311 utilization, etc.) each map displays.** Zip code colors correspond to values for that measure, with darker zip codes having higher values. Hover over a zip code to display its exact value for the specified measure. Display different measures side-by-side to see how they do – or don't – correlate.
 
-• Use the table drop-down menu to display more 311 call and campaign finance data for the city of Chicago as a whole or a zip code of your choice
+**For example, try selecting 311 Complaints per thousand residents and 311 complaints excluding 60612.** The first map displays a single deep blue zip code in a sea of white. Hover over that zip code to see that it's 60612 with close to 15,600 311 complaints per thousand residents. The second map, which excludes 60612, reveals variation across other zip codes initially obscured by the fact that 60612 had many, many more 311 complaints than any other zip code. With a bit of detective work, you could learn that 60612 is home to a cluster of downtown hospitals, which may be driving this trend.
+
+**Below the maps, several tables display additional details about 311 utilization and campaign contributions in Chicago.** The tables default to city-wide data, but you can use the drop-down to display numbers for a zip code of interest instead. For example, select 60612 to see that the vast majority of 311 calls in the medical district are information only calls, likely from community members seeking information about accessing medical services.
 
 ### Enjoy exploring the Civic Side!
