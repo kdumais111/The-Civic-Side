@@ -1,6 +1,7 @@
-# Francesca Vescia
-import pandas as pd
+# By Francesca Vescia
 import json
+
+
 def contribution_stats(df, zips, stats_file):
     """
     Genereates campaign contribution summary statistics by city zip code (zips)
@@ -31,7 +32,7 @@ def contribution_stats(df, zips, stats_file):
             zip_stats["avg_donation"] = zip_data["amount"].mean()
 
         stats.append(zip_stats)
-    
+
     with open(stats_file, "w") as sf:
         json.dump(stats, sf, indent=1)
 

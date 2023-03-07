@@ -1,7 +1,6 @@
-# Francesca Vescia
+# By Francesca Vescia
 import json
 import re
-import datetime
 import pandas as pd
 
 
@@ -16,7 +15,7 @@ def clean(json_file):
 
     with open(json_file) as jf:
         contributions = json.load(jf)
-    
+
     for contribution in contributions:
         contribution["donor_info"] = contribution["donor_info"].replace(contribution["donor_name"], "")
         contribution["donor_name"] = contribution["donor_name"].title()
@@ -49,7 +48,7 @@ def merge_candidates(candidates):
     for candidate in candidates:
         df = pd.read_json(candidate, dtype=False)
         dfs.append(df)
-    
+
     contributions = pd.concat(dfs)
 
     return contributions
@@ -74,10 +73,10 @@ def process_contributions(df, period_start, period_end):
 
     df["received_date"] = pd.to_datetime(df["received_date"])
     df["zip_num"] = df["zip"].astype("Int64")
-    outside_period = df[ (df["received_date"] < start) | 
+    outside_period = df[ (df["received_date"] < start) |
         (df["received_date"] > end) ].index
     df.drop(outside_period, inplace=True)
-    
+
     return df
 
 
