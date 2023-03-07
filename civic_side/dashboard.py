@@ -101,16 +101,16 @@ app.layout = html.Div(
       Output("wards", 'figure')],
      Input('dropdown', 'value')
  )
-def update_table(value):
+def update_table(zip):
     '''
     Update Graphs with the correct zipcode,
-        value- string of zipcode
+        zip- string of zipcode
         City of Chicago is None.
     returns filtered graphs 
     '''
-    if value != "City of Chicago":
-        return (make_complaint_counts(df, value), make_top_5(value),
-                contributions_table(value), make_wards_precincts(value))
+    if zip != "City of Chicago":
+        return (make_complaint_counts(df, zip), make_top_5(zip),
+                contributions_table(zip), make_wards_precincts(zip))
     return (make_complaint_counts(df), make_top_5(),
                 contributions_table(), make_wards_precincts())
 
