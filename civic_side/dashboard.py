@@ -48,7 +48,7 @@ app.layout = html.Div(
             " during the last completed"
             " mayoral election cycle.  ", 
             html.A("Read more about our data and methods",
-                   href="https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side/blob/main/README.md"),
+                   href="https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side/blob/main/proj-paper.pdf"),
             " and access",
             html.A(" detailed intstructions for interacting with the dashboard",
                    href="https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side/blob/main/README.md"),            
