@@ -1,0 +1,1 @@
+This folder is intentionally empty. Running `poetry run civic_side/prep_data.py` from the command line in the top-level directory (30122-project-the-civic-side) will populate it with processed data files.
