@@ -12,7 +12,6 @@ import plotly.graph_objects as go
 warnings.simplefilter("ignore")
 
 
-
 def make_cloropleth(df, df_revised, zipcodes, color, default):
     '''
     Creates a cloropleth map that is customizable by color
