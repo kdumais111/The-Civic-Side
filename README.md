@@ -1,7 +1,7 @@
 
 ## The Civic Side
 
-The Civic Side dashboard explores several measures of civic engagement across Chicago. It pairs mayoral campaigns contributions data scraped from the [Illinois Board of Elections website](https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCommittees.aspx) with voter turnout and [311 non-emergency service calls](https://www.chicago.gov/city/en/depts/311.html) data from the city of Chicago to investigate how different zip codes engage in political processes and access civic services. (Note that all data are from 2019, to correspond with the most recent completed mayoral election cycle at the time of project development in early 2023.) 
+The Civic Side dashboard explores several measures of civic engagement across Chicago. It pairs mayoral campaigns contributions data scraped from the [Illinois Board of Elections website](https://www.elections.il.gov/CampaignDisclosure/ContributionSearchByCommittees.aspx) with voter turnout and [311 non-emergency service calls](https://www.chicago.gov/city/en/depts/311.html) data from the city of Chicago to investigate how different zip codes engage in political processes and access civic services. (Note that all data are from 2019, to correspond with the most recent completed mayoral election cycle at the time of project development in early 2023. Read more about our data and methods in the project paper.) 
 
 ### To launch the dashboard:
 
@@ -22,5 +22,3 @@ The Civic Side dashboard explores several measures of civic engagement across Ch
 • Use the table drop-down menu to display more 311 call and campaign finance data for the city of Chicago as a whole or a zip code of your choice
 
 ### Enjoy exploring the Civic Side!
-Read more about the Civic Side in our project paper
-
