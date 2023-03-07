@@ -106,7 +106,7 @@ def update_table(value):
         City of Chicago is None.
     returns filtered graphs
     '''
-    if zip != "City of Chicago":
+    if value != "City of Chicago":
         return (make_complaint_counts(df, value), make_top_5(value),
                 contributions_table(value), make_wards_precincts(value))
     return (make_complaint_counts(df), make_top_5(),
@@ -116,11 +116,7 @@ def update_table(value):
 app.run_server(debug=True, port=8070)
 
 
-#Resources Used:
-# https://plotly.com/python/choropleth-maps/#using-geopandas-data-frames
-# https://plotly.com/python/mapbox-county-choropleth/
-# https://community.plotly.com/t/creating-a-dropdown-slider-for-a-choropleth-map-with-plotly-express/49370
-# https://plotly.com/python/hover-text-and-formatting/
+# Resources Used:
 # https://community.plotly.com/t/dash-html-a-tags-within-html-p-tags/18367
 # https://medium.com/codex/how-to-create-a-dashboard-with-a-contact-form-using-python-and-dash-ee3aacffd349
 

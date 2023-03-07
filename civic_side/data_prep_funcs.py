@@ -12,7 +12,7 @@ from campaigns.stats import contribution_stats
 from campaigns.utils import PAGES_TO_SCRAPE, START, END, ZIP_STRS
 
 # Merging structure and csv cleaning functions written by Katherine Dumais
-# Campaign cleaning functions written by Francesca Vescia
+# Campaign cleaning function written by Francesca Vescia
 
 def prep_all_data():
     '''
@@ -28,10 +28,10 @@ def prep_all_data():
 
     #Combine datasets
     voting_zipcode = voting_to_zipcode()
-    zillow= pathlib.Path(__file__
+    zillow = pathlib.Path(__file__
                 ).parent /"the_polis/zillow_cleaned_complete.csv"
     voting_housing = combine_data_zip(voting_zipcode, zillow, "Zipcode")
-    complaints= pathlib.Path(__file__
+    complaints = pathlib.Path(__file__
                 ).parent /"the_polis/311_complaint_count.csv"
     add_complaints = combine_data_zip(voting_housing, complaints, "zipcode")
     campaign = pathlib.Path(__file__
@@ -69,14 +69,14 @@ def combine_data_zip(df, filename, column):
     Returns a merged dataframe.
     '''
     if "json" in str(filename):
-        new_data= pd.read_json(filename)
+        new_data = pd.read_json(filename)
     else:
         new_data = pd.read_csv(filename)
     if column == "zip":
         merged_set = pd.merge(df, new_data, how='left', on="zip")
     else:
-        merged_set = pd.merge(df, new_data, left_on = "zip",
-                        right_on = column, how = "left").drop(columns = [column])
+        merged_set = pd.merge(df, new_data, left_on ="zip",
+                        right_on = column, how ="left").drop(columns=[column])
     merged_set = merged_set.dropna()
     return merged_set
 

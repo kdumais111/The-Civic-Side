@@ -1,7 +1,8 @@
 import pandas as pd
 import pathlib
 
-#Written By Katherine Dumais
+# Clean Voter Turnout Spreadsheet into Ward, Zipcode, Precinct CSV.
+# Written By Katherine Dumais
 
 def clean_voter_turnout():
     '''
@@ -36,7 +37,7 @@ def clean_voter_turnout():
     df = df.drop(headers.index[1:])
     df[3] = df[3].str.replace(r'[ %]',"")
     df = df.dropna()
-    df.iloc[0,0]= "precinct"
+    df.iloc[0,0] = "precinct"
     df.to_csv(pathlib.Path(__file__).parent /"voterturnout.csv",
               index=False, header=False)
     return print("Voter turnout csv complete")
