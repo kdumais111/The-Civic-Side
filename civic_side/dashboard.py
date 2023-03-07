@@ -106,7 +106,7 @@ def update_table(value):
         City of Chicago is None.
     returns filtered graphs
     '''
-    if zip != "City of Chicago":
+    if value != "City of Chicago":
         return (make_complaint_counts(df, value), make_top_5(value),
                 contributions_table(value), make_wards_precincts(value))
     return (make_complaint_counts(df), make_top_5(),

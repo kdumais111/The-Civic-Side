@@ -88,7 +88,7 @@ def make_top_5(zipcode=None):
     '''
     top5 = pd.read_csv(pathlib.Path(__file__).parent\
                       /"the_polis/311_topcomplaints_byzip.csv")
-    if zipcode is None:
+    if zipcode == None:
         data = top5.groupby("SR_TYPE").sum().sort_values(
             by='complaintcounts', ascending=False).iloc[0:5].reset_index()
     else:
@@ -116,7 +116,7 @@ def make_complaint_counts(df, zipcode=None):
     #Link Below Used to Help Write this Code.
     #https://plotly.com/python/choropleth-maps/#using-geopandas-data-frames
 
-    if zipcode is None:
+    if zipcode == None:
         data = df.complaintcounts.sum()
     else:
         data = df.complaintcounts[df.zip == zipcode]
@@ -145,7 +145,7 @@ def make_wards_precincts(zipcode=None):
     wards = pd.read_csv(pathlib.Path(__file__).parent\
                          /"the_polis/clean_zipcode_precinct.csv")
     data = wards.sort_values(by=["ward","precinct"])
-    if zipcode is None:
+    if zipcode == None:
         data = data[["ward","precinct"]].drop_duplicates()
     else:
         data = data[["ward","precinct"]][data["zip"] == zipcode]
@@ -175,7 +175,7 @@ def contributions_table(zipcode = None):
     by_zip = pd.read_json(pathlib.Path(__file__).parent\
                            /"campaigns/contributions/contributions_by_zip.json")
 
-    if zipcode is None:
+    if zipcode == None:
         total_donated = round(by_zip["total_donated"].sum(), 2)
         num_donations = by_zip["num_donations"].sum()
         avg_donation = round((total_donated / num_donations), 2)
