@@ -1,6 +1,6 @@
 import warnings
-import pandas as pd
 import pathlib
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
@@ -199,6 +199,6 @@ def contributions_table(zipcode = None):
                 fill_color = 'white',
                 align = 'center'))
         ])
-    contributions.update_layout(height=int(400), 
+    contributions.update_layout(height=int(400),
                                 title="2019 Mayoral Campaign Contributions")
     return contributions

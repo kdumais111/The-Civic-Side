@@ -1,19 +1,17 @@
 import warnings
-import pandas as pd
+import json
 import pathlib
 from urllib.request import urlopen
-import json
+import pandas as pd
 from dash import Dash, html, dcc, Input, Output
-import plotly.express as px
 import dash_bootstrap_components as dbc
-import plotly.graph_objects as go
 from graphs import make_cloropleth, make_top_5,\
     make_complaint_counts, make_wards_precincts, contributions_table
-'''
-Dashboard Layout
-This Module Creates our Civic Side Dashboard
-This Code work was completed by Katherine Dumais
-'''
+
+#Dashboard Layout
+#This Module Creates our Civic Side Dashboard
+#This Code was completed by Katherine Dumais
+
 
 warnings.simplefilter("ignore")
 
@@ -75,7 +73,7 @@ app.layout = html.Div(
                           'City of Chicago', id='dropdown')]),
 
     dbc.Row(
-            dcc.Graph(id="total complaints", figure=make_complaint_counts(df, ))),
+            dcc.Graph(id="total complaints", figure=make_complaint_counts(df))),
     dbc.Row([
         dbc.Col(
             dcc.Graph(id="top5", figure=make_top_5())),
@@ -101,16 +99,16 @@ app.layout = html.Div(
       Output("wards", 'figure')],
      Input('dropdown', 'value')
  )
-def update_table(zip):
+def update_table(value):
     '''
     Update Graphs with the correct zipcode,
-        zip- string of zipcode
+        zip(str) - zipcode
         City of Chicago is None.
-    returns filtered graphs 
+    returns filtered graphs
     '''
     if zip != "City of Chicago":
-        return (make_complaint_counts(df, zip), make_top_5(zip),
-                contributions_table(zip), make_wards_precincts(zip))
+        return (make_complaint_counts(df, value), make_top_5(value),
+                contributions_table(value), make_wards_precincts(value))
     return (make_complaint_counts(df), make_top_5(),
                 contributions_table(), make_wards_precincts())
 
@@ -125,4 +123,5 @@ app.run_server(debug=True, port=8070)
 # https://plotly.com/python/hover-text-and-formatting/
 # https://community.plotly.com/t/dash-html-a-tags-within-html-p-tags/18367
 # https://medium.com/codex/how-to-create-a-dashboard-with-a-contact-form-using-python-and-dash-ee3aacffd349
+
 
