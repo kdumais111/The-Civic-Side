@@ -47,7 +47,10 @@ app.layout = html.Div(
             ", vary by zip code and income (as proxied by housing prices)."
             " We analyzed 2019 data to look at these relationships"
             " during the last completed"
-            " mayoral election cycle. Explore our findings below!",html.Br()])]),
+            " mayoral election cycle." 
+            " Read more about our data and methods and access detailed instructions"
+            " for interacting with the dashboard in our GitHub respository,"
+            " or dive straight in and explore our findings below!",html.Br()])]),
     dbc.Row([html.P(
         [ "Questions? Comments? ",
         html.A("Drop us a note!",
