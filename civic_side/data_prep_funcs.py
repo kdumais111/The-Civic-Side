@@ -35,7 +35,7 @@ def prep_all_data():
                 ).parent /"the_polis/311_complaint_count.csv"
     add_complaints = combine_data_zip(voting_housing, complaints, "zipcode")
     campaign = pathlib.Path(__file__
-                ).parent /"campaigns/contributions/stats_by_zip.json"
+                ).parent /"campaigns/contributions/contributions_by_zip.json"
     add_campaign = combine_data_zip(add_complaints, campaign, "zip")
 
     # Make csv
