@@ -1,3 +1,4 @@
+# Francesca Vescia
 import json
 import re
 import datetime
@@ -52,6 +53,7 @@ def merge_candidates(candidates):
     contributions = pd.concat(dfs)
 
     return contributions
+
 
 def process_contributions(df, period_start, period_end):
     """
