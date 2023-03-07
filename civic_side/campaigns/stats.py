@@ -1,6 +1,6 @@
+# Francesca Vescia
 import pandas as pd
 import json
-
 def contribution_stats(df, zips, stats_file):
     """
     Genereates campaign contribution summary statistics by city zip code (zips)
