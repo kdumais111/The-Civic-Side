@@ -1,4 +1,4 @@
-# Francesca Vescia
+# By Francesca Vescia
 import pandas as pd
 import json
 def contribution_stats(df, zips, stats_file):
