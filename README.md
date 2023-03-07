@@ -18,6 +18,7 @@ The Civic Side dashboard explores several measures of civic engagement across Ch
 ### To interact with the dashhboard:
 
 • Pick your metrics of choice from the map drop-down menus – compare the maps side-by-side to see which metrics do (and don't) correlate with each other
-• Scroll down and pick a zip code from the next drop-down menu to populate the tables
+
+• Use the table drop-down menu to display more detailed 311 and campaign finance data for the city of Chicago as a whole or a zip code of your choice
 
 ### Enjoy exploring the Civic Side!
