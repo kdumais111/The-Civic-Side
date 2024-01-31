@@ -17,17 +17,23 @@ def clean(json_file):
         contributions = json.load(jf)
 
     for contribution in contributions:
-        contribution["donor_info"] = contribution["donor_info"].replace(contribution["donor_name"], "")
+        contribution["donor_info"] = contribution["donor_info"].replace(
+            contribution["donor_name"], ""
+        )
         contribution["donor_name"] = contribution["donor_name"].title()
         contribution["donor_info"] = contribution["donor_info"].strip()
         if re.search(",\s+\D{2}\s+\d{5}", contribution["donor_info"]):
-            state_zip = re.search(",\s+\D{2}\s+\d{5}", contribution["donor_info"]).group()
+            state_zip = re.search(
+                ",\s+\D{2}\s+\d{5}", contribution["donor_info"]
+            ).group()
             contribution["state"] = re.search("[A-Z]{2}", state_zip).group()
             contribution["zip"] = re.search("\d{5}", state_zip).group()
         else:
             contribution["state"] = None
             contribution["zip"] = None
-        contribution["amount"] = float(contribution["amount"].replace("$", "").replace(",", ""))
+        contribution["amount"] = float(
+            contribution["amount"].replace("$", "").replace(",", "")
+        )
 
     with open(clean_file, "w") as cf:
         json.dump(contributions, cf, indent=1)
@@ -57,7 +63,7 @@ def merge_candidates(candidates):
 def process_contributions(df, period_start, period_end):
     """
     Takes a Pandas dataframe of clean campaign contributions data (df),
-    converts dates from strings, and drops contributions received outside 
+    converts dates from strings, and drops contributions received outside
     the specified period.
 
     Inputs:
@@ -73,8 +79,9 @@ def process_contributions(df, period_start, period_end):
 
     df["received_date"] = pd.to_datetime(df["received_date"])
     df["zip_num"] = df["zip"].astype("Int64")
-    outside_period = df[ (df["received_date"] < start) |
-        (df["received_date"] > end) ].index
+    outside_period = df[
+        (df["received_date"] < start) | (df["received_date"] > end)
+    ].index
     df.drop(outside_period, inplace=True)
 
     return df

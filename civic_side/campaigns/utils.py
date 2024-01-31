@@ -1,44 +1,26 @@
 import pathlib
 
 # HTML from BOE website
-chico_page = pathlib.Path(__file__
-                ).parent / "saved_pages/chico.html"
-daley_page = pathlib.Path(__file__
-                ).parent / "saved_pages/daley.html"
-enyia_page = pathlib.Path(__file__
-                ).parent / "saved_pages/enyia.html"
-joyce_page = pathlib.Path(__file__
-                ).parent / "saved_pages/joyce.html"
-lightfoot_page = pathlib.Path(__file__
-                ).parent / "saved_pages/lightfoot.html"
-mendoza_page = pathlib.Path(__file__
-                ).parent / "saved_pages/mendoza.html"
-preckwinkle_page = pathlib.Path(__file__
-                ).parent / "saved_pages/preckwinkle.html"
-vallas_page = pathlib.Path(__file__
-                ).parent / "saved_pages/vallas.html"
-wilson_page = pathlib.Path(__file__
-                ).parent / "saved_pages/wilson.html"
+chico_page = pathlib.Path(__file__).parent / "saved_pages/chico.html"
+daley_page = pathlib.Path(__file__).parent / "saved_pages/daley.html"
+enyia_page = pathlib.Path(__file__).parent / "saved_pages/enyia.html"
+joyce_page = pathlib.Path(__file__).parent / "saved_pages/joyce.html"
+lightfoot_page = pathlib.Path(__file__).parent / "saved_pages/lightfoot.html"
+mendoza_page = pathlib.Path(__file__).parent / "saved_pages/mendoza.html"
+preckwinkle_page = pathlib.Path(__file__).parent / "saved_pages/preckwinkle.html"
+vallas_page = pathlib.Path(__file__).parent / "saved_pages/vallas.html"
+wilson_page = pathlib.Path(__file__).parent / "saved_pages/wilson.html"
 
 # Destination files for raw scraped data
-chico_raw = pathlib.Path(__file__
-                ).parent / "contributions/chico.json"
-daley_raw = pathlib.Path(__file__
-                ).parent / "contributions/daley.json"
-enyia_raw = pathlib.Path(__file__
-                ).parent / "contributions/enyia.json"
-joyce_raw = pathlib.Path(__file__
-                ).parent / "contributions/joyce.json"
-lightfoot_raw = pathlib.Path(__file__
-                ).parent / "contributions/lightfoot.json"
-mendoza_raw = pathlib.Path(__file__
-                ).parent / "contributions/mendoza.json"
-preckwinkle_raw = pathlib.Path(__file__
-                ).parent / "contributions/preckwinkle.json"
-vallas_raw = pathlib.Path(__file__
-                ).parent / "contributions/vallas.json"
-wilson_raw = pathlib.Path(__file__
-                ).parent / "contributions/wilson.json"
+chico_raw = pathlib.Path(__file__).parent / "contributions/chico.json"
+daley_raw = pathlib.Path(__file__).parent / "contributions/daley.json"
+enyia_raw = pathlib.Path(__file__).parent / "contributions/enyia.json"
+joyce_raw = pathlib.Path(__file__).parent / "contributions/joyce.json"
+lightfoot_raw = pathlib.Path(__file__).parent / "contributions/lightfoot.json"
+mendoza_raw = pathlib.Path(__file__).parent / "contributions/mendoza.json"
+preckwinkle_raw = pathlib.Path(__file__).parent / "contributions/preckwinkle.json"
+vallas_raw = pathlib.Path(__file__).parent / "contributions/vallas.json"
+wilson_raw = pathlib.Path(__file__).parent / "contributions/wilson.json"
 
 PAGES_TO_SCRAPE = [
     (chico_page, chico_raw),
@@ -49,27 +31,135 @@ PAGES_TO_SCRAPE = [
     (mendoza_page, mendoza_raw),
     (preckwinkle_page, preckwinkle_raw),
     (vallas_page, vallas_raw),
-    (wilson_page, wilson_raw)
+    (wilson_page, wilson_raw),
 ]
 
-START = "11/26/2018" # Start of 2019 candidate filing period
-END = "12/31/2019" # End of 2019 election cycle
+START = "11/26/2018"  # Start of 2019 candidate filing period
+END = "12/31/2019"  # End of 2019 election cycle
 
-ZIP_INTS = [60647, 60622, 60642, 60611, 60610, 60654, 60614, 60615, 60653,
-    60616, 60609, 60605, 60604, 60649, 60619, 60637, 60621, 60620,
-    60617, 60628, 60827, 60643, 60633, 60608, 60632, 60629, 60638,
-    60636, 60652, 60655, 60623, 60644, 60624, 60612, 60607, 60639,
-    60651, 60661, 60634, 60707, 60618, 60641, 60657, 60625, 60630,
-    60606, 60602, 60603, 60601, 60656, 60646, 60659, 60645, 60626,
-    60660, 60640, 60631, 60706, 60613]
+ZIP_INTS = [
+    60647,
+    60622,
+    60642,
+    60611,
+    60610,
+    60654,
+    60614,
+    60615,
+    60653,
+    60616,
+    60609,
+    60605,
+    60604,
+    60649,
+    60619,
+    60637,
+    60621,
+    60620,
+    60617,
+    60628,
+    60827,
+    60643,
+    60633,
+    60608,
+    60632,
+    60629,
+    60638,
+    60636,
+    60652,
+    60655,
+    60623,
+    60644,
+    60624,
+    60612,
+    60607,
+    60639,
+    60651,
+    60661,
+    60634,
+    60707,
+    60618,
+    60641,
+    60657,
+    60625,
+    60630,
+    60606,
+    60602,
+    60603,
+    60601,
+    60656,
+    60646,
+    60659,
+    60645,
+    60626,
+    60660,
+    60640,
+    60631,
+    60706,
+    60613,
+]
 
-ZIP_STRS = ['60647','60622','60642', '60611', '60610', '60654', '60614', '60615', '60653',
-    '60616', '60609', '60605', '60604', '60649', '60619', '60637', '60621', '60620',
-    '60617', '60628', '60827', '60643', '60633', '60608', '60632', '60629', '60638',
-    '60636', '60652', '60655', '60623', '60644', '60624', '60612', '60607', '60639',
-    '60651', '60661', '60634', '60707', '60618', '60641', '60657', '60625', '60630',
-    '60606', '60602', '60603', '60601', '60656', '60646', '60659', '60645', '60626',
-    '60660', '60640', '60631', '60706', '60613']
+ZIP_STRS = [
+    "60647",
+    "60622",
+    "60642",
+    "60611",
+    "60610",
+    "60654",
+    "60614",
+    "60615",
+    "60653",
+    "60616",
+    "60609",
+    "60605",
+    "60604",
+    "60649",
+    "60619",
+    "60637",
+    "60621",
+    "60620",
+    "60617",
+    "60628",
+    "60827",
+    "60643",
+    "60633",
+    "60608",
+    "60632",
+    "60629",
+    "60638",
+    "60636",
+    "60652",
+    "60655",
+    "60623",
+    "60644",
+    "60624",
+    "60612",
+    "60607",
+    "60639",
+    "60651",
+    "60661",
+    "60634",
+    "60707",
+    "60618",
+    "60641",
+    "60657",
+    "60625",
+    "60630",
+    "60606",
+    "60602",
+    "60603",
+    "60601",
+    "60656",
+    "60646",
+    "60659",
+    "60645",
+    "60626",
+    "60660",
+    "60640",
+    "60631",
+    "60706",
+    "60613",
+]
 
 
 # References (relevant dates):

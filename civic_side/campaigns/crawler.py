@@ -2,6 +2,7 @@
 import json
 import lxml.html
 
+
 def get_contributions(saved_page):
     """
     Takes an HTML file saved from a committee contributions page and returns
@@ -12,8 +13,8 @@ def get_contributions(saved_page):
 
     rows = root.cssselect("#ContentPlaceHolder1_gvContributions tr")
 
-    del rows[0] # header
-    del rows[-2:] # page numbers
+    del rows[0]  # header
+    del rows[-2:]  # page numbers
 
     contributions = []
 
