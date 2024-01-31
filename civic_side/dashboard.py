@@ -3,10 +3,12 @@ import json
 import pathlib
 from urllib.request import urlopen
 import pandas as pd
+import ssl
 from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 from graphs import make_cloropleth, make_top_5,\
     make_complaint_counts, make_wards_precincts, contributions_table
+import certifi
 
 #Dashboard Layout
 #This Module Creates our Civic Side Dashboard
@@ -14,11 +16,12 @@ from graphs import make_cloropleth, make_top_5,\
 
 
 warnings.simplefilter("ignore")
+context = ssl.create_default_context(cafile=certifi.where())
 
 #Import idea taken from Stephania and Project APWhy
 zip_url = "https://data.cityofchicago.org/api/geospatial/"\
             "unjd-c2ca?method=export&format=GeoJSON"
-with urlopen(zip_url) as response:
+with urlopen(zip_url, context=context) as response:
     zipcodes = json.load(response)
 
 app = Dash(external_stylesheets=[dbc.themes.YETI])

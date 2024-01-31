@@ -1,6 +1,7 @@
 import pathlib
 import pandas as pd
-
+import requests
+from io import StringIO
 #Code to Clean 311 Dataset
 #Code Written By Katherine Dumais
 
@@ -24,7 +25,9 @@ def make_311dataframe():
     Returns filtered pandas dataframe
     '''
     # Data downloaded exclusively for 2019
-    df = pd.read_csv("https://30122-public.s3.amazonaws.com/311_2019.csv")
+    url = "https://30122-public.s3.amazonaws.com/311_2019.csv"
+    response = requests.get(url, verify=False)
+    df = pd.read_csv(StringIO(response.text))
     df = df[["SR_TYPE", "ZIP_CODE", "WARD", "PRECINCT"]]
     df["ZIP_CODE"] = pd.to_numeric(df["ZIP_CODE"], errors='coerce')
     return df
