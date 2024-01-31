@@ -7,7 +7,7 @@ The Civic Side dashboard explores several measures of civic engagement across Ch
 
 1. Download the [Civic Side GitHub repository](https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side)
 
-2. Navigate to the top-level directory, `30122-project-the-civic-side`
+2. Navigate to the top-level directory, `The-Civic-Side`
 
 3. Run `poetry install` from the command line to active the virtual environment
 
