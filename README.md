@@ -5,7 +5,7 @@ The Civic Side dashboard explores several measures of civic engagement across Ch
 
 ### To launch the dashboard:
 
-1. Download the [Civic Side GitHub repository](https://github.com/uchicago-capp122-spring23/30122-project-the-civic-side)
+1. Download the [Civic Side GitHub repository](https://github.com/kdumais111/The-Civic-Side)
 
 2. Navigate to the top-level directory, `The-Civic-Side`
 
